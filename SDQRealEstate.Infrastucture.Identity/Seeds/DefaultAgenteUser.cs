@@ -9,17 +9,19 @@ using System.Threading.Tasks;
 
 namespace SDQRealEstate.Infrastructure.Identity.Seeds
 {
-    public class DefaultBasicUser
+    public class DefaultAgenteUser
     {
         public static async Task SeedAsync(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             ApplicationUser defaultUser = new();
-            defaultUser.FirstName = "YONIBER";
-            defaultUser.LastName = "ENCARNACION";
-            defaultUser.UserName = "yoniberplay";
-            defaultUser.Email = "20211442@itla.edu.do";
+            defaultUser.FirstName = "Ramy";
+            defaultUser.LastName = "Campusano Volquez";
+            defaultUser.UserName = "Ramy.Campusano";
+            defaultUser.Email = "202010153@itla.edu.do";
+            defaultUser.PhoneNumber = "8097978451";
             defaultUser.EmailConfirmed = true;
             defaultUser.PhoneNumberConfirmed = true;
+            defaultUser.Foto = "/Images/Users/ramy.jpg";
 
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {
@@ -27,8 +29,8 @@ namespace SDQRealEstate.Infrastructure.Identity.Seeds
 
                 if (user == null)
                 {
-                    await userManager.CreateAsync(defaultUser,"YOniber00+");
-                    await userManager.AddToRoleAsync(defaultUser,Roles.Basic.ToString());
+                    await userManager.CreateAsync(defaultUser, "Campusano00+");
+                    await userManager.AddToRoleAsync(defaultUser,Roles.Agente.ToString());
                 }
 
             }

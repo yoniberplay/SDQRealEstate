@@ -46,10 +46,11 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
 
         [Required(ErrorMessage = "Seleccione nivel de acceso")]
         [DataType(DataType.Text)]
-
         public string Tipo { get; set; }
 
-        public double Monto { get; set; } = 0.00;
+        [Required(ErrorMessage = "Tiene que usar una foto para mostrar a los demas")]
+        [DataType(DataType.Text)]
+        public string Foto { get; set; } 
 
         public bool HasError { get; set; }
         public string? Error { get; set; }

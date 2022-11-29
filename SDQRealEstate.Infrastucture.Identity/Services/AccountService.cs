@@ -102,7 +102,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, Roles.Basic.ToString());
+                await _userManager.AddToRoleAsync(user, Roles.Cliente.ToString());
                 var verificacion = await SendVerificationEmailUri(user, origin);
                 await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
                 {

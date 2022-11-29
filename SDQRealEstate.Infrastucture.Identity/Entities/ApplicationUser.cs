@@ -12,5 +12,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Entities
 
         public String FirstName { get; set; }
         public String LastName { get; set; }
+        public String Foto { get; set; }
+
     }
 }

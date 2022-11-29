@@ -8,8 +8,8 @@ namespace SDQRealEstate.Core.Application.Enums
 {
     public enum Roles
     {
-        SuperAdmin,
+        Agente,
         Admin,
-        Basic
+        Cliente
     }
 }

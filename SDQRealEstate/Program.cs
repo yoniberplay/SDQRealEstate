@@ -49,8 +49,9 @@ using (var scope = app.Services.CreateScope())
         var rolemanager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
         await DefaultRoles.SeedAsync(usermanager, rolemanager);
-        await DefaultBasicUser.SeedAsync(usermanager, rolemanager);
-        await DefaultSuperAdminUser.SeedAsync(usermanager, rolemanager);
+        await DefaultAdminUser.SeedAsync(usermanager, rolemanager);
+        await DefaultAgenteUser.SeedAsync(usermanager, rolemanager);
+        await DefaultClientUser.SeedAsync(usermanager, rolemanager);
 
     }
     catch (Exception ex)
