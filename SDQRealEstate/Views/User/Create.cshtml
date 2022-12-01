@@ -15,7 +15,7 @@
             </section>
             <h2>Registro</h2>
         </div>
-        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+       
         <div class="w-25 mx-1">                
             <label asp-for="FirstName" class="form-label text-sm-left">Nombre: </label>                
             <input asp-for="FirstName" class="form-control bg-whitegray" />
@@ -62,10 +62,11 @@
             <span asp-validation-for="Tipo" class="text-danger"></span>
         </div>
 
+        
         <div class="w-25 mx-1">
             <label asp-for="Password" class="form-label text-sm-left">Contraseña: </label>
             <input asp-for="Password" class="form-control bg-whitegray" />
-            <span asp-validation-for="Password" class="text-danger"></span>
+            @*<span asp-validation-for="Password" class="text-danger"></span>*@
         </div>
 
         <div class="w-25 mx-1">
@@ -77,8 +78,14 @@
         <div class="w-100 mx-1 text-center mt-3 mb-2">
             <button type="submit" class="btn btn-purple">Guardar</button>
             <a asp-controller="Home" asp-action="Index" class="btn btn-light">Volver atras</a>
+
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
         </div>
 
     </form>
+    
 </div>
 

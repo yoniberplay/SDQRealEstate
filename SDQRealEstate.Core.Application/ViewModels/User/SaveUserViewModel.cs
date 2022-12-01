@@ -23,7 +23,9 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
         [DataType(DataType.Text)]
         public string Username { get; set; }
 
-        [Required(ErrorMessage = "Debe colocar una contraseña")]
+        //[Required(ErrorMessage = "Debe colocar una contraseña")]
+        [RegularExpression(@"(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^\da-zA-Z]).{8,15}$",
+         ErrorMessage = "Contraseña poco segura, debe colocar entre 8 y 15 caracteres incluyendo Mayusculas, Minusculas y @#$%^&*()_+")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
