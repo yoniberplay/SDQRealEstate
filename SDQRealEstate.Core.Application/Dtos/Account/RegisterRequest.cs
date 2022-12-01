@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,9 @@ namespace SDQRealEstate.Core.Application.Dtos.Account
         public String ConfirmPassword { get; set; }
         public String Password { get; set; }
         public String Phone { get; set; }
+        public string Foto { get; set; }
+        public IFormFile? File { get; set; }
+        public string Tipo { get; set; }
 
     }
 }

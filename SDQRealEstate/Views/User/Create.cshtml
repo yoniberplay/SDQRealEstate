@@ -1,4 +1,5 @@
 ﻿@using SDQRealEstate.Core.Application.ViewModels.User;
+@using SDQRealEstate.Core.Application.Enums;
 @model SaveUserViewModel
 @{
     ViewData["Title"] = "Registro";
@@ -6,15 +7,7 @@
 
 <div class="w-100 bg-whitegray d-flex flex-row justify-content-between align-items-center" style="height: 82.4vh">
 
-    @if (Model.HasError)
-    {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <p>@Model.Error</p>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-    }
-                    
-    <form method="post" asp-controller="User" asp-action="Register" class="w-75 p-2 rounded bg-white mx-auto shadow-sm d-flex flex-row flex-wrap justify-content-evenly align-items-center">
+    <form method="post" asp-controller="User" asp-action="Create" enctype = "multipart/form-data" class="w-75 p-2 rounded bg-white mx-auto shadow-sm d-flex flex-row flex-wrap justify-content-evenly align-items-center">
                
         <div class="w-75 d-flex flex-column justify-content-center align-items-center">
             <section class="w-auto p-4 rounded-circle bg-purple text-white d-flex flex-row justify-content-center align-items-center">
@@ -22,52 +15,68 @@
             </section>
             <h2>Registro</h2>
         </div>
-
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
         <div class="w-25 mx-1">                
             <label asp-for="FirstName" class="form-label text-sm-left">Nombre: </label>                
             <input asp-for="FirstName" class="form-control bg-whitegray" />
-            <span asp-validation-for="FirstName" class="text-purple"></span>
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
                          
         <div class="w-25 mx-1">
             <label asp-for="LastName" class="form-label text-sm-left">Apellido: </label>
             <input asp-for="LastName" class="form-control bg-whitegray" />
-            <span asp-validation-for="LastName" class="text-purple"></span>
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
+
+        <div class="w-25 mx-1">
+            <label asp-for="Phone" class="form-label text-sm-left">Telefono: </label>
+            <input asp-for="Phone" class="form-control bg-whitegray" />
+            <span asp-validation-for="Phone" class="text-danger"></span>
+        </div>
+
                
         <div class="w-25 mx-1">                
             <label asp-for="Username" class="form-label text-sm-left">Nombre de usuario: </label>
             <input asp-for="Username" class="form-control bg-whitegray" />
-            <span asp-validation-for="Username" class="text-purple"></span>
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="w-25 mx-1">                
+            <label asp-for="File" class="form-label text-sm-left">Foto: </label>
+            <input required asp-for="File" class="form-control bg-whitegray" />
+            <span asp-validation-for="File" class="text-danger"></span>
+        </div>
+
+         <div class="w-25 mx-1">
+            <label asp-for="Email" class="form-label text-sm-left">Correo: </label>
+            <input asp-for="Email" class="form-control bg-whitegray" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="w-25 mx-1">
+            <label asp-for="Tipo" class="form-label text-sm-left">Tipo de cuenta: </label>
+            <select asp-for="Tipo"  class="form-select">
+                            <option value=@Roles.Cliente.ToString() >Cliente</option>
+                            <option value=@Roles.Agente.ToString() >Agente</option>
+                        </select>
+            <span asp-validation-for="Tipo" class="text-danger"></span>
         </div>
 
         <div class="w-25 mx-1">
             <label asp-for="Password" class="form-label text-sm-left">Contraseña: </label>
             <input asp-for="Password" class="form-control bg-whitegray" />
-            <span asp-validation-for="Password" class="text-purple"></span>
+            <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <div class="w-25 mx-1">
             <label asp-for="ConfirmPassword" class="form-label text-sm-left">Confirmar contraseña: </label>
             <input asp-for="ConfirmPassword" class="form-control bg-whitegray" />
-            <span asp-validation-for="ConfirmPassword" class="text-purple"></span>
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
                 
-        <div class="w-25 mx-1">
-            <label asp-for="Phone" class="form-label text-sm-left">Telefono: </label>
-            <input asp-for="Phone" class="form-control bg-whitegray" />
-            <span asp-validation-for="Phone" class="text-purple"></span>
-        </div>
-
-        <div class="w-25 mx-1">
-            <label asp-for="Email" class="form-label text-sm-left">Correo: </label>
-            <input asp-for="Email" class="form-control bg-whitegray" />
-            <span asp-validation-for="Email" class="text-purple"></span>
-        </div>
-
         <div class="w-100 mx-1 text-center mt-3 mb-2">
             <button type="submit" class="btn btn-purple">Guardar</button>
-            <a asp-controller="User" asp-action="Index" class="btn btn-light">Volver atras</a>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-light">Volver atras</a>
         </div>
 
     </form>

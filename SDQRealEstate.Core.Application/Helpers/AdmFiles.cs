@@ -10,7 +10,7 @@ namespace SDQRealEstate.Core.Application.Helpers
     public static class AdmFiles
     {
 
-        public static string UploadFile(IFormFile file, int id, String ruta, bool isEditMode = false, string imagePath = "")
+        public static string UploadFile(IFormFile file, String id, String ruta, bool isEditMode = false, string imagePath = "")
         {
             if (isEditMode)
             {

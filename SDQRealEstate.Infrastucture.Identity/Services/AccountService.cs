@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SDQRealEstate.Core.Application.Helpers;
 
 namespace SDQRealEstate.Infrastructure.Identity.Services
 {
@@ -67,7 +68,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
             return response;
         }
 
-        public async Task<RegisterResponse> RegisterBasicUserAsync(RegisterRequest request, String origin)
+        public async Task<RegisterResponse> RegisterClientUserAsync(RegisterRequest request, String origin)
         {
             RegisterResponse response = new()
             {
@@ -96,20 +97,40 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                 UserName = request.UserName,
                 LastName = request.LastName,
                 FirstName = request.FirstName,
-                PhoneNumber = request.Phone
-            };
+                PhoneNumber = request.Phone,
+                Foto = ""
 
+            };
+            
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, Roles.Cliente.ToString());
-                var verificacion = await SendVerificationEmailUri(user, origin);
+
+                var foto = AdmFiles.UploadFile(request.File, user.Id, "Users");
+                user.Foto = foto;
+                await _userManager.UpdateAsync(user);
+                if (request.Tipo.Equals("Cliente"))
+                {
+                    
+                    await _userManager.AddToRoleAsync(user, Roles.Cliente.ToString());
+                    var verificacion = await SendVerificationEmailUri(user, origin);
+                    await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
+                    {
+                        To = user.Email,
+                        Body = $"Por favor valide su cuenta ingresando a URL {verificacion}",
+                        Subject = "Confirm registration"
+                    });
+
+                }else { 
+                await _userManager.AddToRoleAsync(user, Roles.Agente.ToString());
                 await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
                 {
                     To = user.Email,
-                    Body = $"Por favor valide su cuenta ingresando a URL {verificacion}",
+                    Body = $"Gracias por unirte a nuestra familia, tu cuenta sera revisada y activada por un admistrador en un plazo de 24 horas.",
                     Subject = "Confirm registration"
                 });
+                }
+
             }
             else
             {
@@ -120,6 +141,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
 
             return response;
         }
+        
         public async Task<string> ConfirmAccountAsync(string userId, string token)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -220,5 +242,10 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
 
             return response;
         }
+
+
+
+
+        
     }
 }

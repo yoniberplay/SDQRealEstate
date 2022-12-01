@@ -5,7 +5,8 @@
 @{
     var User = httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
     var isAdmin = User != null ? User.Roles.Any(r => r == "Admin") : false;
-    var isBasic = User != null ? User.Roles.Any(r => r == "Basic") : false;
+    var isClient = User != null ? User.Roles.Any(r => r == "Cliente") : false;
+    var isAgent = User != null ? User.Roles.Any(r => r == "Agente") : false;
 }
 
 <!DOCTYPE html>
@@ -34,7 +35,7 @@
                     }
                     else
                     {
-                        <a class="navbar-brand" asp-area="" asp-controller="User" asp-action="Index">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                             <img width="200" height="40" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
                         </a>
                     }
@@ -42,7 +43,7 @@
                 } 
                 else
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="User" asp-action="Index">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
                         <img width="200" height="40" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
                     </a>
                 }
@@ -85,12 +86,15 @@
                                 <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="LogOut">Cerrar session (@(User.UserName))</a>
                             </li>
                         }
-                       @* else
+                        else
                         {
                             <li class="nav-item align-content-end">
-                                <a class="nav-link text-primary fw-bold " asp-area="" asp-controller="User" asp-action="Register">Registrate!</a>
+                                <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="Create">Unete a la App</a>
                             </li>
-                        }*@
+                             <li class="nav-item align-content-end">
+                                <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="Index">Iniciar Sesion</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

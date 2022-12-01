@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,11 +17,6 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
         [Required(ErrorMessage = "Debe colocar el apellido")]
         [DataType(DataType.Text)]
         public string LastName { get; set; }
-
-
-        [Required(ErrorMessage = "Debe colocar la Cedula")]
-        [DataType(DataType.Text)]
-        public string NumberId { get; set; }
 
 
         [Required(ErrorMessage = "Debe colocar un nombre de usuario")]
@@ -44,15 +40,17 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
         [DataType(DataType.Text)]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Seleccione nivel de acceso")]
+        [Required(ErrorMessage = "Seleccione Tipo de cuenta")]
         [DataType(DataType.Text)]
         public string Tipo { get; set; }
 
-        [Required(ErrorMessage = "Tiene que usar una foto para mostrar a los demas")]
-        [DataType(DataType.Text)]
-        public string Foto { get; set; } 
+        public string? Foto { get; set; }
 
-        public bool HasError { get; set; }
+        [Required(ErrorMessage = "Tiene que usar una foto para mostrar a los demas")]
+        [DataType(DataType.Upload)]
+        public IFormFile? File { get; set; }
+
+        public bool? HasError { get; set; }
         public string? Error { get; set; }
     }
 }

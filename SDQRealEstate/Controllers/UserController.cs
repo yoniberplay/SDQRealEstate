@@ -117,6 +117,27 @@ namespace WebApp.SDQRealEstate.Controllers
             return View();
         }
 
+        [ServiceFilter(typeof(LoginAuthorize))]
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        [ServiceFilter(typeof(LoginAuthorize))]
+        [HttpPost]
+        public async Task<IActionResult> Create(SaveUserViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var origin = Request.Headers["origin"];
+            await _userService.RegisterAsync(vm, origin);
+
+            return RedirectToRoute(new { controller = "User", action = "Index" });
+        }
     }
 }
 

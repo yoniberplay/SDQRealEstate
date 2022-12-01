@@ -38,7 +38,7 @@ namespace SDQRealEstate.Core.Application.Services
         public async Task<RegisterResponse> RegisterAsync(SaveUserViewModel vm, string origin)
         {
             RegisterRequest registerRequest = _mapper.Map<RegisterRequest>(vm);
-            return await _accountService.RegisterBasicUserAsync(registerRequest, origin);
+            return await _accountService.RegisterClientUserAsync(registerRequest, origin);
         }
 
         public async Task<string> ConfirmEmailAsync(string userId, string token)
