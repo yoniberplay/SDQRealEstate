@@ -1,15 +1,15 @@
-﻿using SDQRealEstate.Core.Domain.Common;
+﻿using SDQRealEstate.Core.Application.ViewModels.Fotos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDQRealEstate.Core.Domain.Entities
+namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
 {
-    public class Propiedad : AuditableBaseEntity
+    public class PropiedadViewModel
     {
-
+        public int Id { get; set; }
         public String? UserId { get; set; }
         public String? TipoPropiedad { get; set; }
         public String? TipoVenta { get; set; }
@@ -22,7 +22,7 @@ namespace SDQRealEstate.Core.Domain.Entities
         public int CantBanos { get; set; }
         public int Metros { get; set; }
 
-        public ICollection<Fotos>? Fotos { get; set; }
+        public List<FotoViewModel>? fotos = new();
 
     }
 }

@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace SDQRealEstate.Core.Application.Interfaces.Repositories
 {
-    public interface IPostRepository : IGenericRepository<Propiedades>
+    public interface IPropiedadRepository : IGenericRepository<Propiedad>
     {
-        Task<Propiedades> GetBywithRelationship(int id);
+        Task<Propiedad> GetBywithRelationship(int id);
     }
 }
