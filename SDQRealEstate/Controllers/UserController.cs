@@ -36,7 +36,27 @@ namespace WebApp.SDQRealEstate.Controllers
             if (userVm != null && userVm.HasError != true)
             {
                 HttpContext.Session.Set<AuthenticationResponse>("user", userVm);
-                return RedirectToRoute(new { controller = "Home", action = "Index" });
+
+                var isAdmin = User != null ? userVm.Roles.Any(r => r == "Admin") : false;
+                var isClient = User != null ? userVm.Roles.Any(r => r == "Cliente") : false;
+                var isAgent = User != null ? userVm.Roles.Any(r => r == "Agente") : false;
+                String controlador = "";
+                if (isAdmin)
+                {
+                    controlador = "Admin";
+                }
+                else if (isClient)
+                {
+                    controlador = "Client";
+                }
+                else if (isAgent)
+                {
+                    controlador = "Agent";
+
+                }
+
+                return RedirectToRoute(new { controller = controlador, action = "Index" });
+
             }
             else
             {
@@ -120,7 +140,7 @@ namespace WebApp.SDQRealEstate.Controllers
         [ServiceFilter(typeof(LoginAuthorize))]
         public IActionResult Create()
         {
-            return View();
+            return View(new SaveUserViewModel());
         }
 
 
@@ -130,6 +150,7 @@ namespace WebApp.SDQRealEstate.Controllers
         {
             if (!ModelState.IsValid)
             {
+                vm.HasError = true;
                 return View(vm);
             }
 

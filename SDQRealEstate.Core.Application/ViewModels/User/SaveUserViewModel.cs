@@ -52,7 +52,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
         [DataType(DataType.Upload)]
         public IFormFile? File { get; set; }
 
-        public bool? HasError { get; set; }
+        public bool HasError { get; set; } 
         public string? Error { get; set; }
     }
 }

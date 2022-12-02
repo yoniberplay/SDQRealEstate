@@ -16,10 +16,23 @@ namespace WebApp.SDQRealEstate.Middlewares
 
         public async Task OnActionExecutionAsync(ActionExecutingContext context,ActionExecutionDelegate next)
         {
-            if (_userSession.HasUser())
+
+            var user = _userSession.HasUser();
+            if (user != null)
             {
                 var controller = (UserController)context.Controller;
-                context.Result = controller.RedirectToAction("index", "home");
+                if (user.Roles.Any(n => n == "Admin"))
+                {
+                    context.Result = controller.RedirectToAction("index", "Admin");
+                }else if (user.Roles.Any(n => n == "Cliente"))
+                {
+                    context.Result = controller.RedirectToAction("index", "Client");
+                }
+                else
+                {
+                    context.Result = controller.RedirectToAction("index", "Agent");
+                }
+
             }
             else
             {

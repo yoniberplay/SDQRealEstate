@@ -14,15 +14,15 @@ namespace SDQRealEstate.Middlewares
             _httpContextAccessor = httpContextAccessor;
         }
 
-        public bool HasUser()
+        public AuthenticationResponse HasUser()
         {
             AuthenticationResponse userViewModel = _httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
 
             if (userViewModel == null)
             {
-                return false;
+                return null;
             }
-            return true;
+            return userViewModel;
         }
 
     }

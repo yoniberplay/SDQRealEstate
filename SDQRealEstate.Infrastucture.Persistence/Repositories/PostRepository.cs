@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SDQRealEstate.Infrastructure.Persistence.Repositories
 {
-    public class PostRepository : GenericRepository<Post>, IPostRepository
+    public class PostRepository : GenericRepository<Propiedades>, IPostRepository
     {
         private readonly ApplicationContext _dbContext;
 
@@ -17,16 +17,16 @@ namespace SDQRealEstate.Infrastructure.Persistence.Repositories
         }
 
 #pragma warning disable CS0114 // Member hides inherited member; missing override keyword
-        public virtual async Task<List<Post>> GetAllAsync()  //Se sobrescribe pero sigue cumpliendo su misma funcion SOLID
+        public virtual async Task<List<Propiedades>> GetAllAsync()  //Se sobrescribe pero sigue cumpliendo su misma funcion SOLID
 #pragma warning restore CS0114 // Member hides inherited member; missing override keyword
         {
-            return await _dbContext.Set<Post>()
+            return await _dbContext.Set<Propiedades>()
                 //.Include(a => a.User)
                 //.Include(c => c.Comments)
                 .ToListAsync(); //Deferred execution
         }
 
-        public Task<Post> GetBywithRelationship(int id)
+        public Task<Propiedades> GetBywithRelationship(int id)
         {
             throw new NotImplementedException();
         }

@@ -25,66 +25,70 @@
             <div class="container-fluid">
                 
                 @if (User != null)
-                {                        
-
-                    if(!isAdmin)
+                {
+                    String controlador="";
+                    if(isAdmin)
                     {
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                            <img width="200" height="40" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
-                        </a>
-                    }
-                    else
+                        controlador = "Admin";
+                    }else if (isClient)
                     {
-                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                            <img width="200" height="40" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
-                        </a>
+                        controlador = "Client";
+                    }
+                    else if (isAgent)
+                    {
+                        controlador = "Agent";
+                         
                     }
 
+                    <a class="navbar-brand" asp-area="" asp-controller="@controlador" asp-action="Index">
+                            <img width="150" height="30" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
+                        </a>
                 } 
                 else
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img width="200" height="40" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
+                        <img width="150" height="30" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
                     </a>
                 }
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+             
+                <div class="navbar-collapse  collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav me-auto mb-2 mb-md-0">
                         @if (User != null)
                         {                        
-
-                            if(!isAdmin)
+                            if(isAdmin)
                             {
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Home" asp-action="Index">Lista Productos</a>
-                                    <li class="nav-item dropdown">
-                                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Pagos
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Admin" asp-action="Index">Inicio</a>
+                                     <li class="nav-item dropdown">
+                                          <a class="nav-link dropdown-toggle text-primary fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Mantenimiento
                                           </a>
-                                          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                                <li><a asp-controller="ClientUsers" asp-action="ExpressFee" class="dropdown-item nav-link text-dark">Expreso</a></li>
-                                                <li><a asp-controller="ClientUsers" asp-action="CreditCardFee" class="dropdown-item nav-link text-dark">Tarjeta de Credito</a></li>
-                                                <li><a asp-controller="ClientUsers" asp-action="LoanFee" class="dropdown-item nav-link text-dark">Prestamos</a></li>
-                                                <li><a asp-controller="ClientUsers" asp-action="RecipientFee" class="dropdown-item nav-link text-dark">Beneficiario</a></li>
+                                          <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
+                                                <li><a asp-controller="Admin" asp-action="ExpressFee" class="dropdown-item nav-link text-primary">Administradores</a></li>
+                                                <li><a asp-controller="Admin" asp-action="CreditCardFee" class="dropdown-item nav-link text-primary">Desarrolladores</a></li>
+                                                <li><a asp-controller="Admin" asp-action="LoanFee" class="dropdown-item nav-link text-primary">Tipo de propiedades</a></li>
+                                                <li><a asp-controller="Admin" asp-action="LoanFee" class="dropdown-item nav-link text-primary">Tipo de ventas</a></li>
+                                                <li><a asp-controller="Admin" asp-action="LoanFee" class="dropdown-item nav-link text-primary">Mejoras</a></li>
                                           </ul>
                                     </li>
 
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ClientUsers" asp-action="Recipient">Beneficiario</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ClientUsers" asp-action="MoneyAdvance">Avance de Efectivo</a>
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="ClientUsers" asp-action="AccountTransfer">Transferencia</a>
-                            }else{
+                            }else if(isClient){
+
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Client" asp-action="Index">Inicio</a>
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Client" asp-action="Home">Agentes</a>
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Client" asp-action="Home">Mis propiedades</a>
+
+                            }else if(isAgent){
                                 
-                                <li class="nav-item">
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="AdmUsers" asp-action="Index">Administrar usuarios</a>
-                                </li>
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Inicio</a>
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Mi Perfil</a>
+                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Mantenimiento de propiedades</a>
 
                             }
 
                             <li class="nav-item align-content-end">
                                 <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="LogOut">Cerrar session (@(User.UserName))</a>
                             </li>
+
                         }
                         else
                         {
@@ -106,7 +110,7 @@
         </main>
     </div>
 
-    <footer class="border-top bg-dark footer text-white">
+    <footer class="border-top bg-dark footer text-white text-muted fixed-bottom">
         <div class="container text-center">
             &copy; 2022 - Internet_banking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Contribuyentes</a>
         </div>

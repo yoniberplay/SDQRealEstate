@@ -14,7 +14,7 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
-        public DbSet<Post> Post { get; set; }
+        public DbSet<Propiedad> Propiedad { get; set; }
        
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
@@ -43,8 +43,8 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
 
             #region tables
 
-            modelBuilder.Entity<Post>()
-                .ToTable("Post");
+            modelBuilder.Entity<Propiedad>()
+                .ToTable("Propiedad");
 
             //modelBuilder.Entity<Comments>()
             //    .ToTable("Comments");
@@ -58,7 +58,7 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             #endregion
 
             #region "primary keys"
-            modelBuilder.Entity<Post>()
+            modelBuilder.Entity<Propiedad>()
                 .HasKey(p => p.Id);
 
             //modelBuilder.Entity<Comments>()
@@ -99,18 +99,18 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
 
             #region "Property configurations"
 
-            #region Post
+            #region Propiedad
 
-            modelBuilder.Entity<Post>().
+            modelBuilder.Entity<Propiedad>().
                 Property(p => p.UserId)
                 .IsRequired();
 
-            modelBuilder.Entity<Post>().
-               Property(p => p.Text)
+            modelBuilder.Entity<Propiedad>().
+               Property(p => p.Metros)
                .IsRequired();
 
-            modelBuilder.Entity<Post>().
-               Property(p => p.Text)
+            modelBuilder.Entity<Propiedad>().
+               Property(p => p.CantBanos)
                .IsRequired();
 
             #endregion

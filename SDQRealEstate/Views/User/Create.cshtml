@@ -79,10 +79,11 @@
             <button type="submit" class="btn btn-purple">Guardar</button>
             <a asp-controller="Home" asp-action="Index" class="btn btn-light">Volver atras</a>
 
+            @if(Model.HasError  == true){
             <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
-
+            }
         </div>
 
     </form>
