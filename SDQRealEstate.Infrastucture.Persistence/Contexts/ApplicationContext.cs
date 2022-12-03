@@ -15,7 +15,11 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options) { }
 
         public DbSet<Propiedad> Propiedad { get; set; }
-       
+        public DbSet<Fotos> Fotos { get; set; }
+        public DbSet<Mejora> Mejora { get; set; }
+        public DbSet<TipoPropiedades> TipoPropiedades { get; set; }
+        public DbSet<TipoVenta> TipoVenta { get; set; }
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -46,14 +50,17 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Propiedad>()
                 .ToTable("Propiedad");
 
-            //modelBuilder.Entity<Comments>()
-            //    .ToTable("Comments");
+            modelBuilder.Entity<Fotos>()
+                .ToTable("Fotos");
 
-            //modelBuilder.Entity<User>()
-            //    .ToTable("Users");
+            modelBuilder.Entity<Mejora>()
+                .ToTable("Mejora");
 
-            //modelBuilder.Entity<Friendship>()
-            //    .ToTable("Friendship");
+            modelBuilder.Entity<TipoPropiedades>()
+                .ToTable("TipoPropiedades");
+
+            modelBuilder.Entity<TipoVenta>()
+                .ToTable("TipoVenta");
 
             #endregion
 
@@ -61,39 +68,26 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<Propiedad>()
                 .HasKey(p => p.Id);
 
-            //modelBuilder.Entity<Comments>()
-            //    .HasKey(c => c.Id);
+            modelBuilder.Entity<Fotos>()
+                .HasKey(c => c.Id);
 
-            //modelBuilder.Entity<User>()
-            //    .HasKey(u => u.Id);
+            modelBuilder.Entity<Mejora>()
+                .HasKey(u => u.Id);
 
-            //modelBuilder.Entity<Friendship>()
-            //   .HasKey(f => f.Id);
+            modelBuilder.Entity<TipoPropiedades>()
+               .HasKey(f => f.Id);
+
+            modelBuilder.Entity<TipoVenta>()
+               .HasKey(f => f.Id);
             #endregion
 
             #region "Relationships"
 
-            //modelBuilder.Entity<User>()
-            //.HasMany<Post>(user => user.Post)
-            //.WithOne(P => P.User)            
-            //.HasForeignKey(p => p.UserId)
-            //.OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<User>()
-            //.HasMany<Friendship>(user => user.Friendship)
-            //.WithOne(P => P.User)
-            //.HasForeignKey(p => p.IdUser)
-            //.HasForeignKey(p => p.IdFriend)
-            //.OnDelete(DeleteBehavior.Cascade);
-
-            //modelBuilder.Entity<Post>()
-            //    .HasMany<Comments>(a => a.Comments)
-            //    .WithOne(c => c.Post)
-            //    .HasForeignKey(f => f.PostId)
-            //    .OnDelete(DeleteBehavior.NoAction);
-
-
-
+            modelBuilder.Entity<Propiedad>()
+            .HasMany<Fotos>(f => f.Fotos)
+            .WithOne(P => P.propiedad)
+            .HasForeignKey(p => p.PropiedadId)
+            .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
@@ -113,31 +107,74 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
                Property(p => p.CantBanos)
                .IsRequired();
 
+                modelBuilder.Entity<Propiedad>().
+               Property(p => p.ImgUrl)
+               .IsRequired();
+
+            modelBuilder.Entity<Propiedad>().
+             Property(p => p.CantHabitaciones)
+             .IsRequired();
+
+            modelBuilder.Entity<Propiedad>().
+             Property(p => p.TipoVenta).IsRequired();
+
+            modelBuilder.Entity<Propiedad>().
+               Property(p => p.TipoPropiedad)
+               .IsRequired();
+
+            modelBuilder.Entity<Propiedad>().
+               Property(p => p.Precio)
+               .IsRequired();
+
+            modelBuilder.Entity<Propiedad>().
+               Property(p => p.Descripcion)
+               .IsRequired();
+
             #endregion
 
-            #region Comments
-            //modelBuilder.Entity<Comments>().
-            //  Property(c => c.Text)
-            //  .IsRequired();
+            #region Fotos
+            modelBuilder.Entity<Fotos>().
+              Property(c => c.PropiedadId)
+              .IsRequired();
 
-            //modelBuilder.Entity<Comments>().
-            // Property(c => c.UserId)
-            // .IsRequired();
+            modelBuilder.Entity<Fotos>().
+             Property(c => c.UserId)
+             .IsRequired();
 
-            //modelBuilder.Entity<Comments>().
-            //Property(c => c.PostId)
-            //.IsRequired();
+            modelBuilder.Entity<Fotos>().
+            Property(c => c.ImageUrl)
+            .IsRequired();
             #endregion
 
-            #region Friendship
+            #region Mejora
+            modelBuilder.Entity<Mejora>().
+              Property(c => c.Name)
+              .IsRequired();
 
-            //modelBuilder.Entity<Friendship>().
-            //  Property(f => f.IdUser)
-            //  .IsRequired();
+            modelBuilder.Entity<Mejora>().
+             Property(c => c.Description)
+             .IsRequired();
+            #endregion
 
-            //modelBuilder.Entity<Friendship>().
-            //Property(f => f.IdFriend)
-            //.IsRequired();
+            #region TipoVenta
+            modelBuilder.Entity<Mejora>().
+              Property(c => c.Name)
+              .IsRequired();
+
+            modelBuilder.Entity<Mejora>().
+             Property(c => c.Description)
+             .IsRequired();
+            #endregion
+
+            #region TipoPropiedades
+            modelBuilder.Entity<Mejora>().
+              Property(c => c.Name)
+              .IsRequired();
+
+            modelBuilder.Entity<Mejora>().
+             Property(c => c.Description)
+             .IsRequired();
+
             #endregion
 
             #endregion
