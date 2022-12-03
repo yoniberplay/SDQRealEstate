@@ -9,6 +9,7 @@ namespace SDQRealEstate.Core.Domain.Entities
 {
     public class TipoPropiedades : AuditableBaseEntity
     {    
+
         public string Name { get; set; }
         public string Description { get; set; }
 

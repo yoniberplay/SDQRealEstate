@@ -7,6 +7,11 @@ using System.Text;
 using System.Threading.Tasks;
 using SDQRealEstate.Core.Application.ViewModels.User;
 using SDQRealEstate.Core.Application.Dtos.Account;
+using SDQRealEstate.Core.Application.ViewModels.Propiedad;
+using SDQRealEstate.Core.Application.ViewModels.Fotos;
+using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
+using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
 
 namespace SDQRealEstate.Core.Application.Mappings
 {
@@ -36,58 +41,101 @@ namespace SDQRealEstate.Core.Application.Mappings
                 .ReverseMap();
             #endregion
 
-            //#region mapeo de post
-            //CreateMap<Post, PostViewModel>()
-            //    .ReverseMap()
-            //    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            //    .ForMember(dest => dest.LastModified, opt => opt.Ignore())
-            //    .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #region mapeo de Propiedad
+            CreateMap<Propiedad, PropiedadViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
-            //CreateMap<Post, SavePostViewModel>()
-            //    .ForMember(dest => dest.File, opt => opt.Ignore())
-            //    .ForMember(dest => dest.NuevoComentario, opt => opt.Ignore())
-            //    .ForMember(dest => dest.Idpost, opt => opt.Ignore())
-            //   .ReverseMap()
-            //   .ForMember(dest => dest.Created, opt => opt.Ignore())
-            //   .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            //   .ForMember(dest => dest.LastModified, opt => opt.Ignore())
-            //   .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
-            //#endregion
+            CreateMap<Propiedad, SavePropiedadViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.File, opt => opt.Ignore())
+                .ForMember(dest => dest.File2, opt => opt.Ignore())
+                .ForMember(dest => dest.File3, opt => opt.Ignore())
+                .ForMember(dest => dest.File4, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(dest => dest.Fotos, opt => opt.Ignore())
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #endregion
 
-            //#region mapeo de comments
-            //CreateMap<Comments, CommentsViewModel>()
-            //    .ReverseMap()
-            //    .ForMember(dest => dest.Created, opt => opt.Ignore())
-            //    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            //    .ForMember(dest => dest.LastModified, opt => opt.Ignore())
-            //    .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #region mapeo de Fotos
+            CreateMap<Fotos, FotoViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
-            //CreateMap<Comments, SaveCommentViewModel>()
-            //   .ReverseMap()
-            //   .ForMember(dest => dest.User, opt => opt.Ignore())
-            //   .ForMember(dest => dest.Post, opt => opt.Ignore())
-            //   .ForMember(dest => dest.Created, opt => opt.Ignore())
-            //   .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            //   .ForMember(dest => dest.LastModified, opt => opt.Ignore())
-            //   .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
-            //#endregion
+            CreateMap<Fotos, SaveFotoViewModel>()
+               .ForMember(dest => dest.Id, opt => opt.Ignore())
+               .ForMember(dest => dest.File, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #endregion
 
-            //#region mapeo de Amistad
-            //CreateMap<Friendship, FriendshipViewModel>()
-            //    .ReverseMap()
-            //    .ForMember(dest => dest.Created, opt => opt.Ignore())
-            //    .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            //    .ForMember(dest => dest.LastModified, opt => opt.Ignore())
-            //    .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #region mapeo de Mejora
+            CreateMap<Mejora, MejoraViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
-            //CreateMap<Friendship, SaveFriendViewModel>()
-            //     .ForMember(dest => dest.amigo, opt => opt.Ignore())
-            //   .ReverseMap()
-            //   .ForMember(dest => dest.Created, opt => opt.Ignore())
-            //   .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
-            //   .ForMember(dest => dest.LastModified, opt => opt.Ignore())
-            //   .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
-            //#endregion
+            CreateMap<Mejora, SaveMejoraViewModel>()
+               .ForMember(dest => dest.Id, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #endregion
+
+            #region mapeo de TipoPropiedades
+            CreateMap<TipoPropiedades, SaveTipoPropiedadViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<TipoPropiedades, TipoPropiedadViewModel>()
+               .ForMember(dest => dest.Id, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #endregion
+
+            #region mapeo de TipoVenta
+            CreateMap<TipoVenta, TipoVentaViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<TipoVenta, SaveTipoVentaViewModel>()
+               .ForMember(dest => dest.Id, opt => opt.Ignore())
+               .ReverseMap()
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+            #endregion
 
 
         }

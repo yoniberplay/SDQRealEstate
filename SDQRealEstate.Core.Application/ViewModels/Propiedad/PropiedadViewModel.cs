@@ -22,7 +22,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         public int CantBanos { get; set; }
         public int Metros { get; set; }
 
-        public List<FotoViewModel>? fotos = new();
+        public ICollection<FotoViewModel>? fotos;
 
     }
 }

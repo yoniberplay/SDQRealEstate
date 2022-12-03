@@ -15,10 +15,13 @@ namespace SDQRealEstate.Core.Application
         {
             #region Services
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            //services.AddTransient<IPostService, PostService>();
-            //services.AddTransient<ICommentService, CommentService>();
+            services.AddTransient<IPropiedadService, PropiedadService>();
+            services.AddTransient<IFotosService, FotosService>();
             services.AddTransient<IUserService, UserService>();
-            //services.AddTransient<IFriendshipService, FriendshipService>();
+            services.AddTransient<IMejoraService, MejoraService>();
+            services.AddTransient<ITipoPropiedadService, TipoPropiedadService>();
+            services.AddTransient<ITipoVentaService, TipoVentaService>();
+
             #endregion
         }
     }

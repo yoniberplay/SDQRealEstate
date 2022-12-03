@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SDQRealEstate.Core.Application.ViewModels.TipoVenta
+namespace SDQRealEstate.Core.Application.ViewModels.Fotos
 {
     public class SaveFotoViewModel 
     {
@@ -14,7 +14,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.TipoVenta
 
         [Required(ErrorMessage = "*")]
         [DataType(DataType.Text)]
-        public int IdPropiedad { get; set; }
+        public int PropiedadId { get; set; }
 
         [Required(ErrorMessage = "*")]
         [DataType(DataType.Text)]

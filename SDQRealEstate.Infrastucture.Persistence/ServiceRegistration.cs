@@ -33,8 +33,12 @@ namespace SDQRealEstate.Infrastructure.Persistence
 
             #region Repositories
             services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddTransient<IFotosRepository, FotoRepository>();
+            services.AddTransient<IMejoraRepository, MejoraRepository>();
+            services.AddTransient<ITipoVentaRepository, TipoVentaRepository>();
+            services.AddTransient<ITipoPropiedadesRepository, TipoPropiedadesRepository>();
             services.AddTransient<IPropiedadRepository, PropiedadRepository>();
-     
+
             #endregion
         }
     }

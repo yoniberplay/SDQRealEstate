@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using SDQRealEstate.Core.Application.ViewModels.Mejoras;
 using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
 using System;
 using System.Collections.Generic;
