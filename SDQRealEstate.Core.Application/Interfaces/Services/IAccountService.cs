@@ -1,6 +1,5 @@
 ﻿using SDQRealEstate.Core.Application.Dtos.Account;
-
-
+using SDQRealEstate.Core.Application.ViewModels.User;
 
 namespace SDQRealEstate.Core.Application.Interfaces.Services
 {
@@ -12,5 +11,6 @@ namespace SDQRealEstate.Core.Application.Interfaces.Services
         Task<RegisterResponse> RegisterClientUserAsync(RegisterRequest request, string origin);
         Task<ResetPasswordResponse> ResetPasswordAsync(ResetPasswordRequest request);
         Task SignOutAsync();
+
     }
 }

@@ -1,0 +1,58 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.User;
+
+@{
+    List<UserViewModel> UsersAgent = ViewBag.UsersAdmin;
+    String currentuser = ViewBag.currentuser;
+    ViewData["Title"] =  "Administradores";
+
+}
+
+<div class="w-75 d-flex justify-content-end">
+        <div class="">
+            <a asp-controller="Admin" asp-action="CreateAdmin"  class="btn btn-primary"><b> <i class="fa fa-plus" style="font-size:20px"></i>Crear Admin</b></a>
+        </div>
+    </div>
+<div class="container d-flex align-items-center justify-content-center ">
+<div class="w-75 ">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">APELLIDO</th>
+      <th scope="col">USUARIO</th>
+      <th scope="col">TELEFONO</th>
+      <th scope="col">CORREO</th>
+      <th scope="col">ESTATUS</th>
+      <th scope="col">ACCION</th>
+    </tr>
+  </thead>
+  <tbody>
+
+      @foreach (var item in UsersAgent)
+{
+     <tr>
+      <td>@item.FirstName</td>
+      <td>@item.LastName</td>
+      <td>@item.Username</td>
+      <td>@item.Phone</td>
+      <td>@item.Email </td>
+      <td>@(@item.EmailConfirmed? "ACTIVO" : "INACTIVO")</td>
+       @if (@item.Id != currentuser)
+                            {
+       <td>
+<a asp-controller="Admin" asp-action=@(item.EmailConfirmed? "DesactivarAdmin" : "ActivarAdmin") asp-route-id="@item.Id" class="btn w-100 @(@item.EmailConfirmed? "btn-warning" : "btn-success")"> @(@item.EmailConfirmed? "DESACTIVAR" : "ACTIVAR") </a>
+                            </td>
+                        }else
+                        {
+                             <td>NINGUNA</td>
+                        }
+
+       <td><a asp-controller="Admin" asp-action="UpdateAdmin" asp-route-id="@item.Id" class="btn w-100 btn-info"> EDITAR </a> </td>
+                    </tr>
+}
+  </tbody>
+</table>
+</div>
+
+</div>
+

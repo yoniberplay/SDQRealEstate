@@ -50,6 +50,7 @@ namespace SDQRealEstate.Infrastructure.Identity
 
             #region services
             services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IManageUsersService, ManageUsersService>();
             #endregion
         }
     }

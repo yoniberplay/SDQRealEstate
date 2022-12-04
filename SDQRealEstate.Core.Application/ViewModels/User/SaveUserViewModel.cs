@@ -54,5 +54,6 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
 
         public bool HasError { get; set; } 
         public string? Error { get; set; }
+        public string? Id { get; set; }
     }
 }

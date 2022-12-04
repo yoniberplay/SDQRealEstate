@@ -18,6 +18,9 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Internet_banking.styles.css" asp-append-version="true" />
+     @*<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">*@
+    <!-- Font Awesome CSS -->
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">*@
 </head>
 <body>
     <header>
@@ -58,16 +61,17 @@
                             if(isAdmin)
                             {
                                     <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Admin" asp-action="Index">Inicio</a>
+                                     <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Admin" asp-action="agentes">Listado Agentes</a>
                                      <li class="nav-item dropdown">
                                           <a class="nav-link dropdown-toggle text-primary fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Mantenimiento
                                           </a>
                                           <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                                <li><a asp-controller="Admin" asp-action="ExpressFee" class="dropdown-item nav-link text-primary">Administradores</a></li>
-                                                <li><a asp-controller="Admin" asp-action="CreditCardFee" class="dropdown-item nav-link text-primary">Desarrolladores</a></li>
-                                                <li><a asp-controller="Admin" asp-action="LoanFee" class="dropdown-item nav-link text-primary">Tipo de propiedades</a></li>
-                                                <li><a asp-controller="Admin" asp-action="LoanFee" class="dropdown-item nav-link text-primary">Tipo de ventas</a></li>
-                                                <li><a asp-controller="Admin" asp-action="LoanFee" class="dropdown-item nav-link text-primary">Mejoras</a></li>
+                                                <li><a asp-controller="Admin" asp-action="Administradores" class="dropdown-item nav-link text-primary">Administradores</a></li>
+                                                <li><a asp-controller="Admin" asp-action="Desarrolladores" class="dropdown-item nav-link text-primary">Desarrolladores</a></li>
+                                                <li><a asp-controller="Admin" asp-action="propiedades" class="dropdown-item nav-link text-primary">Tipo de propiedades</a></li>
+                                                <li><a asp-controller="Admin" asp-action="ventas" class="dropdown-item nav-link text-primary">Tipo de ventas</a></li>
+                                                <li><a asp-controller="Admin" asp-action="mejoras" class="dropdown-item nav-link text-primary">Mejoras</a></li>
                                           </ul>
                                     </li>
 
@@ -115,6 +119,7 @@
             &copy; 2022 - Internet_banking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Contribuyentes</a>
         </div>
     </footer>
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

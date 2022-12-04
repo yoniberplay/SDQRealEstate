@@ -121,7 +121,8 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                         Subject = "Confirm registration"
                     });
 
-                }else { 
+                }else if(request.Tipo.Equals("Agente"))
+                { 
                 await _userManager.AddToRoleAsync(user, Roles.Agente.ToString());
                 await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
                 {
@@ -129,6 +130,20 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                     Body = $"Gracias por unirte a nuestra familia, tu cuenta sera revisada y activada por un admistrador en un plazo de 24 horas.",
                     Subject = "Confirm registration"
                 });
+                }
+                else if (request.Tipo.Equals("Desarrollador"))
+                {
+                    await _userManager.AddToRoleAsync(user, Roles.Desarrollador.ToString());
+                    await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
+                    {
+                        To = user.Email,
+                        Body = $"Gracias por unirte a nuestra familia de Desarrolladores.",
+                        Subject = "Confirm registration"
+                    });
+                }
+                else
+                {
+                    await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
                 }
 
             }

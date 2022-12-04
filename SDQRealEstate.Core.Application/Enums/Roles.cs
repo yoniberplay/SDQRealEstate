@@ -10,6 +10,7 @@ namespace SDQRealEstate.Core.Application.Enums
     {
         Agente,
         Admin,
-        Cliente
+        Cliente,
+        Desarrollador
     }
 }
