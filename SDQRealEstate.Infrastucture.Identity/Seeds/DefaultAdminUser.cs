@@ -23,7 +23,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Seeds
             defaultUser.PhoneNumber = "8299884791";
             defaultUser.EmailConfirmed = true;
             defaultUser.PhoneNumberConfirmed = true;
-            defaultUser.Foto = "/Images/Users/yoniber.jpg";
+            defaultUser.Foto = "/Images/Users/Default/yoniber.jpg";
 
             if (userManager.Users.All(u => u.Id != defaultUser.Id))
             {
