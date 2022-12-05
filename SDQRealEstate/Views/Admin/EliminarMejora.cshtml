@@ -1,0 +1,31 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+@model SaveMejoraViewModel
+@{
+    ViewData["Title"] = "Eliminar Mejora";
+}
+
+<div class="row">
+
+    <div class="col-6 offset-3" >
+        <div class="card">
+            <div class="card-header bg-primary text-light">
+                <h4>¿Está seguro que desea eliminar la mejora @Model.Name?</h4>
+            </div>
+            <div class="card-body">
+
+                <form method="post" asp-controller="Admin" asp-action="EliminarMejora">
+                
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="text-center">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a asp-controller="Admin" asp-action="Mejora" class="btn btn-secondary ">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

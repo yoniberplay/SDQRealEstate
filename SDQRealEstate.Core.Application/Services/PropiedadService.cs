@@ -34,6 +34,20 @@ namespace SDQRealEstate.Core.Application.Services
             return userList.Where(x => x.TipoPropiedadId == id).ToList().Count();
 
         }
+        public async Task<int> GetCantidadTipoVenta(int id)
+        {
+            var userList = await _propiedadRepository.GetAllAsync();
+            return userList.Where(x => x.TipoVentaId == id).ToList().Count();
+
+        }
+
+        public async Task<int> GetCantidadMejora(int id)
+        {
+            //var userList = await _propiedadRepository.GetAllAsync();
+            //return userList.Where(x => x. == id).ToList().Count();
+
+            return 0;
+        }
 
 
     }

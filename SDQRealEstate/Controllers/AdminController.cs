@@ -10,6 +10,8 @@ using SDQRealEstate.Infrastructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
 using AutoMapper;
+using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+using SDQRealEstate.Core.Application.ViewModels.Mejoras;
 
 namespace WebApp.SDQRealEstate.Controllers  
 {
@@ -20,20 +22,24 @@ namespace WebApp.SDQRealEstate.Controllers
         private readonly ITipoPropiedadService _itipoPropiedadService;
         private readonly IManageUsersService _manageuserService;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly AuthenticationResponse _userLogged;
+        private readonly AuthenticationResponse? _userLogged;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPropiedadService _ipropiedadService;
         private readonly IMapper _mapper;
+        private readonly ITipoVentaService _itipoVentaService;
+        private readonly IMejoraService _imejoraService;
 
-        public AdminController(IUserService userService, IMapper mapper, UserManager<ApplicationUser> userManager, IPropiedadService ipropiedadService ,ITipoPropiedadService itipoPropiedadService, IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
+        public AdminController(IUserService userService, IMejoraService imejoraService,ITipoVentaService itipoVentaService,IMapper mapper, UserManager<ApplicationUser> userManager, IPropiedadService ipropiedadService ,ITipoPropiedadService itipoPropiedadService, IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
             _mapper = mapper;
             _userManager = userManager;
             _itipoPropiedadService = itipoPropiedadService;
             _manageuserService = manageuserService;
+            _itipoVentaService = itipoVentaService;
             _httpContextAccessor = httpContextAccessor;
             _ipropiedadService = ipropiedadService;
+            _imejoraService = imejoraService;
             _userLogged = _httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
         }
 
@@ -85,6 +91,7 @@ namespace WebApp.SDQRealEstate.Controllers
         public async Task<IActionResult> agentesAsync()
         {
             ViewBag.UsersAgent = await _manageuserService.GetbyRolList("Agente");
+            ViewBag.currentuser = _userLogged.Id;
 
             return View();
         }
@@ -360,14 +367,6 @@ namespace WebApp.SDQRealEstate.Controllers
             return RedirectToRoute(new { controller = "Admin", action = "propiedades" });
 
         }
-        //public async Task<IActionResult> EliminarTipoPropiedad(int id)
-        //{
-        //    var usertemp = await _itipoPropiedadService.GetByIdSaveViewModel(id);
-        //    await _itipoPropiedadService.Delete(id);
-
-        //    return RedirectToRoute(new { controller = "Admin", action = "propiedades" });
-
-        //}
 
         public async Task<IActionResult> EliminarTipoPropiedad(int id)
         {
@@ -386,16 +385,151 @@ namespace WebApp.SDQRealEstate.Controllers
         }
         #endregion
 
-        public IActionResult ventas()
+        #region Tipo Ventas
+        public async Task<IActionResult> Ventas()
         {
-            return View();
+            var temp = await _itipoVentaService.GetAllViewModel();
+            if (temp != null && temp.Count > 0)
+            {
+                foreach (TipoVentaViewModel i in temp)
+                {
+                    i.Cantidad = await _ipropiedadService.GetCantidadTipoVenta(i.Id);
+                }
+            }
+            return View(temp);
         }
 
-        public IActionResult mejoras()
+        public IActionResult CreateTipoVenta()
         {
-            return View();
+            return View(new SaveTipoVentaViewModel());
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateTipoVenta(SaveTipoVentaViewModel sv)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(sv);
+            }
+
+            var usertemp = await _itipoVentaService.Add(sv);
+            if (usertemp != null)
+            {
+                return RedirectToRoute(new { controller = "Admin", action = "Ventas" });
+            }
+
+            return View(sv);
+
+        }
+        public async Task<IActionResult> EditarTipoVenta(int id)
+        {
+            var usertemp = await _itipoVentaService.GetByIdSaveViewModel(id);
+            return View("CreateTipoVenta", usertemp);
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarTipoVenta(SaveTipoVentaViewModel sv)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(sv);
+
+            }
+            await _itipoVentaService.Update(sv, sv.Id);
+            return RedirectToRoute(new { controller = "Admin", action = "Ventas" });
+
+        }
+
+        public async Task<IActionResult> EliminarTipoVenta(int id)
+        {
+            SaveTipoPropiedadViewModel us = await _itipoVentaService.GetByIdSaveViewModel(id);
+            return View(us);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EliminarTipoVenta(TipoPropiedadViewModel us)
+        {
+            var usertemp = await _itipoVentaService.GetByIdSaveViewModel(us.Id);
+            await _itipoVentaService.Delete(us.Id);
+
+            return RedirectToRoute(new { controller = "Admin", action = "Ventas" });
+        }
+
+        #endregion
+
+        #region Mejoras
+        public async Task<IActionResult> Mejora()
+        {
+            var temp = await _imejoraService.GetAllViewModel();
+            if (temp != null && temp.Count > 0)
+            {
+                foreach (MejoraViewModel i in temp)
+                {
+                    i.Cantidad = await _ipropiedadService.GetCantidadMejora(i.Id);
+                }
+            }
+            return View(temp);
+        }
+
+        public IActionResult CreateMejora()
+        {
+            return View(new SaveMejoraViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateMejora(SaveMejoraViewModel sv)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(sv);
+            }
+
+            var usertemp = await _imejoraService.Add(sv);
+            if (usertemp != null)
+            {
+                return RedirectToRoute(new { controller = "Admin", action = "Mejora" });
+            }
+
+            return View(sv);
+
+        }
+        public async Task<IActionResult> EditarMejora(int id)
+        {
+            var usertemp = await _imejoraService.GetByIdSaveViewModel(id);
+            return View("CreateMejora", usertemp);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditarMejora(SaveTipoVentaViewModel sv)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(sv);
+
+            }
+            await _imejoraService.Update(sv, sv.Id);
+            return RedirectToRoute(new { controller = "Admin", action = "Mejora" });
+
+        }
+
+        public async Task<IActionResult> EliminarMejora(int id)
+        {
+            SaveMejoraViewModel us = await _imejoraService.GetByIdSaveViewModel(id);
+            return View(us);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EliminarMejora(TipoPropiedadViewModel us)
+        {
+            var usertemp = await _imejoraService.GetByIdSaveViewModel(us.Id);
+            await _imejoraService.Delete(us.Id);
+
+            return RedirectToRoute(new { controller = "Admin", action = "Mejora" });
+        }
+
+        #endregion
+        
         public IActionResult AccessDenied()
         {
             return View();

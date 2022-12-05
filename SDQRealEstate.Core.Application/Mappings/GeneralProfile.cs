@@ -85,7 +85,7 @@ namespace SDQRealEstate.Core.Application.Mappings
 
             #region mapeo de Mejora
             CreateMap<Mejora, MejoraViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Cantidad, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(dest => dest.Created, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -93,7 +93,6 @@ namespace SDQRealEstate.Core.Application.Mappings
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
             CreateMap<Mejora, SaveMejoraViewModel>()
-               .ForMember(dest => dest.Id, opt => opt.Ignore())
                .ReverseMap()
                .ForMember(dest => dest.Created, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -123,7 +122,7 @@ namespace SDQRealEstate.Core.Application.Mappings
 
             #region mapeo de TipoVenta
             CreateMap<TipoVenta, TipoVentaViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Cantidad, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(dest => dest.Created, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
@@ -131,7 +130,6 @@ namespace SDQRealEstate.Core.Application.Mappings
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
             CreateMap<TipoVenta, SaveTipoVentaViewModel>()
-               .ForMember(dest => dest.Id, opt => opt.Ignore())
                .ReverseMap()
                .ForMember(dest => dest.Created, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())

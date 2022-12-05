@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Agentes";
     List<UserViewModel> UsersAgent = ViewBag.UsersAgent;
+     String currentuser = ViewBag.currentuser;
 }
 
 <div class="container d-flex align-items-center justify-content-center ">
@@ -30,10 +31,17 @@
       <td>@item.CantPropiedades</td>
       <td>@item.Email</td>
       <td>@(@item.EmailConfirmed? "ACTIVO" : "INACTIVO")</td>
-       <td>
-                  <a class="btn w-100 @(@item.EmailConfirmed? "btn-warning" : "btn-success")" asp-controller="Admin" asp-action=@(item.EmailConfirmed? "DESACTIVARagentes" : "ACTIVARagentes") asp-route-id="@item.Id"> @(@item.EmailConfirmed? "DESACTIVAR" : "ACTIVAR") </a>
-      </td>
-      <td>
+      @if (@item.Id != currentuser)
+                        {
+                            <td>
+                                <a class="btn w-100 @(@item.EmailConfirmed? "btn-warning" : "btn-success")" asp-controller="Admin" asp-action=@(item.EmailConfirmed? "DESACTIVARagentes" : "ACTIVARagentes") asp-route-id="@item.Id"> @(@item.EmailConfirmed? "DESACTIVAR" : "ACTIVAR") </a>
+                            </td>
+                        }
+                        else
+                        {
+                             <td>NINGUNA</td>
+                        }
+                        <td>
           <a class="btn btn-danger" asp-controller="Admin" asp-action="EliminarAgente" asp-route-id="@item.Id"> Eliminar </a>
       </td>
      

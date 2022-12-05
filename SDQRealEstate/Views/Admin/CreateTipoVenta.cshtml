@@ -1,5 +1,5 @@
-﻿@using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
-@model SaveTipoPropiedadViewModel
+﻿@using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+@model SaveTipoVentaViewModel
 @{
     Boolean update = Model.Id != 0 ? true :false;
     ViewData["Title"] = update? "Actualizar":"Crear";
@@ -7,7 +7,7 @@
 
 <div class="w-100 bg-whitegray d-flex flex-row justify-content-between align-items-center" style="height: 82.4vh">
 
-    <form method="post" asp-controller="Admin" asp-action=@(update? "EditarTipoPropiedad" : "CreateTipoPropiedad") enctype = "multipart/form-data" class="w-75 p-2 rounded bg-white mx-auto shadow-sm d-flex flex-row flex-wrap justify-content-evenly align-items-center">
+    <form method="post" asp-controller="Admin" asp-action=@(update? "EditarTipoVenta" : "CreateTipoVenta") enctype = "multipart/form-data" class="w-75 p-2 rounded bg-white mx-auto shadow-sm d-flex flex-row flex-wrap justify-content-evenly align-items-center">
                
         <div class="w-75 d-flex flex-column justify-content-center align-items-center">
             <section class="w-auto p-4 rounded-circle bg-purple text-white d-flex flex-row justify-content-center align-items-center">
@@ -30,7 +30,7 @@
               
         <div class="w-100 mx-1 text-center mt-3 mb-2">
             <button type="submit" class="btn btn-purple"> @(update? "Actualizar" : "Guardar") </button>
-            <a asp-controller="Admin" asp-action="propiedades" class="btn btn-light">Volver atras</a>
+            <a asp-controller="Admin" asp-action="Ventas" class="btn btn-light">Volver atras</a>
                         
             
         </div>

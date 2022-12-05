@@ -1,0 +1,31 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+@model SaveTipoVentaViewModel
+@{
+    ViewData["Title"] = "Eliminar Tipo Venta";
+}
+
+<div class="row">
+
+    <div class="col-6 offset-3" >
+        <div class="card">
+            <div class="card-header bg-primary text-light">
+                <h4>¿Está seguro que desea eliminar el tipo de venta @Model.Name?</h4>
+            </div>
+            <div class="card-body">
+
+                <form method="post" asp-controller="Admin" asp-action="EliminarTipoVenta">
+                
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="text-center">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a asp-controller="Admin" asp-action="Ventas" class="btn btn-secondary ">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

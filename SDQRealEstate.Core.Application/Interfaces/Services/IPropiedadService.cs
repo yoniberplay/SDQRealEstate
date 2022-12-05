@@ -11,5 +11,7 @@ namespace SDQRealEstate.Core.Application.Interfaces.Services
     public interface IPropiedadService : IGenericService<SavePropiedadViewModel, PropiedadViewModel,Propiedad>
     {
         Task<int> GetCantidadTipoPropiedad(int id);
+        Task<int> GetCantidadTipoVenta(int id);
+        Task<int> GetCantidadMejora(int id);
     }
 }

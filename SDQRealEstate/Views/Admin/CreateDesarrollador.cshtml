@@ -19,26 +19,26 @@
         <input type="hidden" asp-for="Id" />
         <div class="w-25 mx-1">                
             <label asp-for="FirstName" class="form-label text-sm-left">Nombre: </label>                
-            <input asp-for="FirstName" class="form-control bg-whitegray" />
+            <input required asp-for="FirstName" class="form-control bg-whitegray" />
             <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
                          
         <div class="w-25 mx-1">
             <label asp-for="LastName" class="form-label text-sm-left">Apellido: </label>
-            <input asp-for="LastName" class="form-control bg-whitegray" />
+            <input required asp-for="LastName" class="form-control bg-whitegray" />
             <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
 
         <div class="w-25 mx-1">
             <label asp-for="Phone" class="form-label text-sm-left">Telefono: </label>
-            <input asp-for="Phone" class="form-control bg-whitegray" />
+            <input required asp-for="Phone" class="form-control bg-whitegray" />
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
 
                
         <div class="w-25 mx-1">                
             <label asp-for="Username" class="form-label text-sm-left">Nombre de usuario: </label>
-            <input asp-for="Username" class="form-control bg-whitegray" />
+            <input required asp-for="Username" class="form-control bg-whitegray" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
 
@@ -50,7 +50,7 @@
 
          <div class="w-25 mx-1">
             <label asp-for="Email" class="form-label text-sm-left">Correo: </label>
-            <input asp-for="Email" class="form-control bg-whitegray" />
+            <input required asp-for="Email" class="form-control bg-whitegray" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
@@ -63,12 +63,12 @@
         
         <div class="w-25 mx-1">
             <label asp-for="Password" class="form-label text-sm-left">Contraseña: </label>
-            <input asp-for="Password" class="form-control bg-whitegray" />
+            <input required asp-for="Password" class="form-control bg-whitegray" />
         </div>
 
         <div class="w-25 mx-1">
             <label asp-for="ConfirmPassword" class="form-label text-sm-left">Confirmar contraseña: </label>
-            <input asp-for="ConfirmPassword" class="form-control bg-whitegray" />
+            <input required asp-for="ConfirmPassword" class="form-control bg-whitegray" />
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
                 

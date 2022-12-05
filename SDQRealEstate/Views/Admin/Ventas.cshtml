@@ -1,0 +1,42 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+
+@model List<TipoVentaViewModel>
+@{
+    ViewData["Title"] =  "Tipo Ventas";
+}
+
+<div class="w-75 d-flex justify-content-end">
+        <div class="">
+            <a asp-controller="Admin" asp-action="CreateTipoVenta"  class="btn btn-primary"><b> <i class="fa fa-plus" style="font-size:20px"></i>Crear Tipo Venta</b></a>
+        </div>
+    </div>
+<div class="container d-flex align-items-center justify-content-center ">
+<div class="w-75 ">
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">NOMBRE</th>
+      <th scope="col">DESCRIPCION</th>
+      <th scope="col">CANTIDAD</th>
+          </tr>
+  </thead>
+  <tbody>
+
+      @foreach (var item in Model)
+{
+     <tr>
+      <td>@item.Name</td>
+      <td>@item.Description</td>
+      <td>@item.Cantidad</td>
+       <td><a asp-controller="Admin" asp-action="EditarTipoVenta" asp-route-id="@item.Id" class="btn w-100 btn-info"> EDITAR </a> </td>
+      <td>
+<a asp-controller="Admin" asp-action="EliminarTipoVenta" asp-route-id="@item.Id" class="btn btn-danger w-100 "> ELIMINAR </a>
+                     </td>      
+                    </tr>
+}
+  </tbody>
+</table>
+</div>
+
+</div>
+
