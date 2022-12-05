@@ -103,17 +103,18 @@ namespace SDQRealEstate.Core.Application.Mappings
 
             #region mapeo de TipoPropiedades
             CreateMap<TipoPropiedades, SaveTipoPropiedadViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ReverseMap()
                 .ForMember(dest => dest.Created, opt => opt.Ignore())
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
+
             CreateMap<TipoPropiedades, TipoPropiedadViewModel>()
-               .ForMember(dest => dest.Id, opt => opt.Ignore())
                .ForMember(dest => dest.Cantidad, opt => opt.Ignore())
                .ReverseMap()
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
                .ForMember(dest => dest.Created, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                .ForMember(dest => dest.LastModified, opt => opt.Ignore())

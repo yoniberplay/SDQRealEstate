@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using SDQRealEstate.Infrastructure.Identity.Entities;
 using Microsoft.AspNetCore.Identity;
 using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
+using AutoMapper;
 
 namespace WebApp.SDQRealEstate.Controllers  
 {
@@ -22,10 +23,12 @@ namespace WebApp.SDQRealEstate.Controllers
         private readonly AuthenticationResponse _userLogged;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IPropiedadService _ipropiedadService;
+        private readonly IMapper _mapper;
 
-        public AdminController(IUserService userService, UserManager<ApplicationUser> userManager, IPropiedadService ipropiedadService ,ITipoPropiedadService itipoPropiedadService, IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
+        public AdminController(IUserService userService, IMapper mapper, UserManager<ApplicationUser> userManager, IPropiedadService ipropiedadService ,ITipoPropiedadService itipoPropiedadService, IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
+            _mapper = mapper;
             _userManager = userManager;
             _itipoPropiedadService = itipoPropiedadService;
             _manageuserService = manageuserService;
@@ -78,6 +81,7 @@ namespace WebApp.SDQRealEstate.Controllers
 
             return RedirectToRoute(new { controller = "Admin", action = "agentes" });
         }
+
         public async Task<IActionResult> agentesAsync()
         {
             ViewBag.UsersAgent = await _manageuserService.GetbyRolList("Agente");
@@ -337,32 +341,48 @@ namespace WebApp.SDQRealEstate.Controllers
             return View(sv);
 
         }
-        public async Task<IActionResult> UpdateTipoPropiedad(int id)
+        public async Task<IActionResult> EditarTipoPropiedad(int id)
         {
             var usertemp = await _itipoPropiedadService.GetByIdSaveViewModel(id);
-
-            SaveTipoPropiedadViewModel us = new();
-            us.Name = usertemp.Name;
-            us.Description = usertemp.Description;
-
-            return View("CreateTipoPropiedad", us);
+            return View("CreateTipoPropiedad", usertemp);
 
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateTipoPropiedad(SaveTipoPropiedadViewModel sv)
+        public async Task<IActionResult> EditarTipoPropiedad(SaveTipoPropiedadViewModel sv)
         {
             if (!ModelState.IsValid)
             {
                 return View(sv);
 
             }
-
             await _itipoPropiedadService.Update(sv, sv.Id);
-
-
             return RedirectToRoute(new { controller = "Admin", action = "propiedades" });
 
+        }
+        //public async Task<IActionResult> EliminarTipoPropiedad(int id)
+        //{
+        //    var usertemp = await _itipoPropiedadService.GetByIdSaveViewModel(id);
+        //    await _itipoPropiedadService.Delete(id);
+
+        //    return RedirectToRoute(new { controller = "Admin", action = "propiedades" });
+
+        //}
+
+        public async Task<IActionResult> EliminarTipoPropiedad(int id)
+        {
+
+            SaveTipoPropiedadViewModel us = await _itipoPropiedadService.GetByIdSaveViewModel(id);
+            return View(us);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EliminarTipoPropiedad(TipoPropiedadViewModel us)
+        {
+            var usertemp = await _itipoPropiedadService.GetByIdSaveViewModel(us.Id);
+            await _itipoPropiedadService.Delete(us.Id);
+
+            return RedirectToRoute(new { controller = "Admin", action = "propiedades" });
         }
         #endregion
 
