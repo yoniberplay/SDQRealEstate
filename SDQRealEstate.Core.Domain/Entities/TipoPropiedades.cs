@@ -13,8 +13,9 @@ namespace SDQRealEstate.Core.Domain.Entities
         public string Name { get; set; }
         public string Description { get; set; }
 
-        ////navigation property
-        //public ICollection<Propiedad>? propiedad { get; set; }
+
+        //navigation property
+        public ICollection<Propiedad>? propiedad { get; set; }
 
     }
 }

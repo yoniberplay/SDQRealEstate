@@ -11,8 +11,8 @@ namespace SDQRealEstate.Core.Domain.Entities
     {
 
         public String? UserId { get; set; }
-        public String? TipoPropiedad { get; set; }
-        public String? TipoVenta { get; set; }
+        public int TipoPropiedadId { get; set; }
+        public int TipoVentaId { get; set; }
         public String? ImgUrl { get; set; }
 
         public String? Descripcion { get; set; }
@@ -22,7 +22,9 @@ namespace SDQRealEstate.Core.Domain.Entities
         public int CantBanos { get; set; }
         public int Metros { get; set; }
 
-        public ICollection<Fotos>? Fotos { get; set; }
+        public ICollection<Fotos>? fotos { get; set; }
+        public TipoPropiedades? tipoPropiedades { get; set; }
+        public TipoVenta? tipoVenta { get; set; }
 
     }
 }

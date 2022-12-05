@@ -84,9 +84,21 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             #region "Relationships"
 
             modelBuilder.Entity<Propiedad>()
-            .HasMany<Fotos>(f => f.Fotos)
+            .HasMany<Fotos>(f => f.fotos)
             .WithOne(P => P.propiedad)
             .HasForeignKey(p => p.PropiedadId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TipoVenta>()
+            .HasMany<Propiedad>(f => f.propiedad)
+            .WithOne(P => P.tipoVenta)
+            .HasForeignKey(p => p.TipoVentaId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<TipoPropiedades>()
+            .HasMany<Propiedad>(f => f.propiedad)
+            .WithOne(P => P.tipoPropiedades)
+            .HasForeignKey(p => p.TipoPropiedadId)
             .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
@@ -116,10 +128,10 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
              .IsRequired();
 
             modelBuilder.Entity<Propiedad>().
-             Property(p => p.TipoVenta).IsRequired();
+             Property(p => p.TipoVentaId).IsRequired();
 
             modelBuilder.Entity<Propiedad>().
-               Property(p => p.TipoPropiedad)
+               Property(p => p.TipoPropiedadId)
                .IsRequired();
 
             modelBuilder.Entity<Propiedad>().

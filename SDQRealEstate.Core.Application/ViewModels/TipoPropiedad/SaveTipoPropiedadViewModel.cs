@@ -15,11 +15,11 @@ namespace SDQRealEstate.Core.Application.ViewModels.TipoPropiedad
 
         [Required(ErrorMessage = "*")]
         [DataType(DataType.Text)]
-        public String? Nombre { get; set; }
+        public String? Name { get; set; }
 
         [Required(ErrorMessage = "*")]
         [DataType(DataType.Text)]
-        public String? Descripcion { get; set; }
+        public String? Description { get; set; }
 
 
     }

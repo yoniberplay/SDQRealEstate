@@ -55,7 +55,7 @@ namespace SDQRealEstate.Core.Application.Mappings
                 .ForMember(dest => dest.File3, opt => opt.Ignore())
                 .ForMember(dest => dest.File4, opt => opt.Ignore())
                .ReverseMap()
-               .ForMember(dest => dest.Fotos, opt => opt.Ignore())
+               .ForMember(dest => dest.fotos, opt => opt.Ignore())
                .ForMember(dest => dest.Created, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
@@ -112,6 +112,7 @@ namespace SDQRealEstate.Core.Application.Mappings
 
             CreateMap<TipoPropiedades, TipoPropiedadViewModel>()
                .ForMember(dest => dest.Id, opt => opt.Ignore())
+               .ForMember(dest => dest.Cantidad, opt => opt.Ignore())
                .ReverseMap()
                .ForMember(dest => dest.Created, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())

@@ -28,6 +28,14 @@ namespace SDQRealEstate.Core.Application.Services
             _propiedadRepository = propiedadRepository;
         }
 
+        public async Task<int> GetCantidadTipoPropiedad(int id)
+        {
+            var userList = await _propiedadRepository.GetAllAsync();
+            return userList.Where(x => x.TipoPropiedadId == id).ToList().Count();
+
+        }
+
+
     }
        
     }
