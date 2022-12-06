@@ -156,7 +156,6 @@ namespace WebApp.SDQRealEstate.Controllers
 
             var origin = Request.Headers["origin"];
             await _userService.RegisterAsync(vm, origin);
-
             return RedirectToRoute(new { controller = "User", action = "Index" });
         }
     }

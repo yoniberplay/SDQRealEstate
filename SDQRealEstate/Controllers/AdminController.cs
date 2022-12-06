@@ -204,6 +204,8 @@ namespace WebApp.SDQRealEstate.Controllers
             
 
             await _userManager.UpdateAsync(usertemp);
+            await _userManager.RemovePasswordAsync(usertemp);
+            await _userManager.AddPasswordAsync(usertemp, sv.Password);
 
 
             return RedirectToRoute(new { controller = "Admin", action = "Administradores" });
@@ -282,6 +284,8 @@ namespace WebApp.SDQRealEstate.Controllers
             usertemp.Foto = AdmFiles.UploadFile(sv.File, usertemp.Id, "Users");
 
             await _userManager.UpdateAsync(usertemp);
+            await _userManager.RemovePasswordAsync(usertemp);
+            await _userManager.AddPasswordAsync(usertemp, sv.Password);
 
 
             return RedirectToRoute(new { controller = "Admin", action = "Desarrolladores" });

@@ -1,13 +1,44 @@
 ﻿@using SDQRealEstate.Core.Application.ViewModels.Propiedad;
 @model List<PropiedadViewModel>
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Home Agente";
 }
 
 
-<div class="text-center">
-      @if (Model == null || Model.Count == 0)
+<div class="container-fluid">
+
+     <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Agent" asp-action="CreatePropiedad" class="btn btn-primary"><b> <i class="fa fa-plus" style="font-size:20px"></i> Crear Propiedad </b></a>
+        </div>
+    </div>
+
+    <div class="row">
+
+        @if (Model == null || Model.Count == 0)
         {
             <h2>No tiene propiedades</h2>
         }
+        else
+        {
+            @foreach (PropiedadViewModel item in Model)
+            {
+                <div class="col-4">
+                    <div class="card shadow-sm">
+                        <img class="bd-placeholder-img card-img-top img-product-size" src="@item.ImgUrl " />
+
+                        <div class="card-body">
+                            <h4 class="card-title">@item.TipoPropiedad - @item.TipoVenta</h4>
+                            <p class="card-text">@item.Descripcion</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                               
+                                <small class="fw-bold fs-6">$@item.Precio</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
 </div>

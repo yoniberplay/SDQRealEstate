@@ -8,6 +8,9 @@ using WebApp.SDQRealEstate.Middlewares;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using SDQRealEstate.Core.Application.ViewModels.Fotos;
+using Microsoft.AspNetCore.Identity;
+using SDQRealEstate.Infrastructure.Identity.Entities;
+using SDQRealEstate.Core.Application.ViewModels.User;
 
 namespace WebApp.SDQRealEstate.Controllers  
 {
@@ -21,15 +24,17 @@ namespace WebApp.SDQRealEstate.Controllers
         private readonly ITipoVentaService _itipoVentaService;
         private readonly ITipoPropiedadService _itipoPropiedadService;
         private readonly IMejoraService _imejoraService;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly IFotosService _ifotosService;
         private readonly IMapper _mapper;
 
         public AgentController(IUserService userService, IFotosService ifotosService, IMejoraService imejoraService, ITipoVentaService itipoVentaService, IMapper mapper,
-            IPropiedadService ipropiedadService, ITipoPropiedadService itipoPropiedadService,
+            IPropiedadService ipropiedadService, UserManager<ApplicationUser> userManager, ITipoPropiedadService itipoPropiedadService,
             IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
             _mapper = mapper;
+            _userManager = userManager;
             _httpContextAccessor = httpContextAccessor;
             _userLogged = _httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
             _ipropiedadService = ipropiedadService;
@@ -153,9 +158,57 @@ namespace WebApp.SDQRealEstate.Controllers
 
         public async Task<IActionResult> MiPerfil()
         {
+            var usertemp = await _userManager.FindByIdAsync(_userLogged.Id);
 
-            return View();
+            SaveUserViewModel us = new();
+            us.FirstName = usertemp.FirstName;
+            us.LastName = usertemp.LastName;
+            us.Email = usertemp.Email;
+            us.Id = usertemp.Id;
+            us.Email = usertemp.Email;
+            us.Phone = usertemp.PhoneNumber;
+            us.Username = usertemp.UserName;
+
+            return View(us);
+
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> MiPerfil(SaveUserViewModel sv)
+        {
+            if (!ModelState.IsValid)
+            {
+                sv.HasError = true;
+                return View("MiPerfil", sv);
+
+            }
+
+            var usertemp = await _userManager.FindByIdAsync(sv.Id);
+
+            usertemp.FirstName = sv.FirstName;
+            usertemp.LastName = sv.LastName;
+            usertemp.PasswordHash = sv.Password;
+            usertemp.Email = sv.Email;
+            usertemp.PhoneNumber = sv.Phone;
+            usertemp.UserName = sv.Username;
+
+            if (sv.File != null)
+            {
+                usertemp.Foto = AdmFiles.UploadFile(sv.File, usertemp.Id, "Users");
+            }
+
+
+            await _userManager.UpdateAsync(usertemp);
+            await _userManager.RemovePasswordAsync(usertemp);
+            await _userManager.AddPasswordAsync(usertemp,sv.Password);
+
+
+            return RedirectToRoute(new { controller = "Agent", action = "Index" });
+
+        }
+
+
         public IActionResult AccessDenied()
         {
             return View();

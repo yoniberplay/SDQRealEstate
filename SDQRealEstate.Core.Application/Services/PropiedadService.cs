@@ -43,10 +43,8 @@ namespace SDQRealEstate.Core.Application.Services
 
         public async Task<int> GetCantidadMejora(int id)
         {
-            //var userList = await _propiedadRepository.GetAllAsync();
-            //return userList.Where(x => x. == id).ToList().Count();
-
-            return 0;
+            var userList = await _propiedadRepository.GetAllAsync();
+            return userList.Where(x => x.MejorasId == id).ToList().Count();
         }
 
         public async Task<List<PropiedadViewModel>> GetAllPropiedadByAgentId(String AgentId)

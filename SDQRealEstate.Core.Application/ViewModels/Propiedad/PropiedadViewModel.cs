@@ -15,6 +15,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         public String? TipoVenta { get; set; }
         public String? Mejoras { get; set; }
         public String? ImgUrl { get; set; }
+        public int MejorasId { get; set; }
 
         public String? Descripcion { get; set; }
         public double Precio { get; set; }
