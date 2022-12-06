@@ -1,0 +1,31 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.Propiedad;
+@model SavePropiedadViewModel
+@{
+    ViewData["Title"] = "Eliminar Propiedad";
+}
+
+<div class="row">
+
+    <div class="col-6 offset-3" >
+        <div class="card">
+            <div class="card-header bg-primary text-light">
+                <h4>¿Está seguro que desea eliminar esta propiedad?</h4>
+            </div>
+            <div class="card-body">
+
+                <form method="post" asp-controller="Agent" asp-action="DeletePropiedad">
+                
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="text-center">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                    <a asp-controller="Agent" asp-action="MantenimientoPropiedades" class="btn btn-secondary ">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+

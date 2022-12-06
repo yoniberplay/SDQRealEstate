@@ -29,7 +29,9 @@ namespace WebApp.SDQRealEstate.Controllers
         private readonly ITipoVentaService _itipoVentaService;
         private readonly IMejoraService _imejoraService;
 
-        public AdminController(IUserService userService, IMejoraService imejoraService,ITipoVentaService itipoVentaService,IMapper mapper, UserManager<ApplicationUser> userManager, IPropiedadService ipropiedadService ,ITipoPropiedadService itipoPropiedadService, IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
+        public AdminController(IUserService userService, IMejoraService imejoraService,ITipoVentaService itipoVentaService,IMapper mapper,
+            UserManager<ApplicationUser> userManager, IPropiedadService ipropiedadService ,ITipoPropiedadService itipoPropiedadService, 
+            IManageUsersService manageuserService, IHttpContextAccessor httpContextAccessor)
         {
             _userService = userService;
             _mapper = mapper;

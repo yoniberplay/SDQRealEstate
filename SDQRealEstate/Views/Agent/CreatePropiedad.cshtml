@@ -1,0 +1,113 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.Propiedad;
+@using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
+@using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+@using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+@using SDQRealEstate.Core.Application.Enums;
+@model SavePropiedadViewModel
+@{
+    Boolean update = (Model.Id != null &&  Model.Id != 0 )? true :false;
+    ViewData["Title"] = update? "Actualiza Propiedad":"Crear Propiedad";
+    List<TipoPropiedadViewModel> TiposPropiedad = ViewBag.TipoPropiedad;
+    List<TipoVentaViewModel> TiposVenta = ViewBag.Venta;
+    List<MejoraViewModel> Mejoras = ViewBag.Mejoras;
+}
+@if (TiposPropiedad==null || TiposPropiedad.Count() ==0)
+{
+    <h2>No se puede crear una propiedad si no existen tipos de propiedades en el sistema.</h2>
+}else if (TiposVenta==null || TiposVenta.Count() ==0)
+{
+    <h2>No se puede crear una propiedad si no existen tipos de ventas.</h2>
+}else if (Mejoras==null || Mejoras.Count() ==0)
+{
+    <h2>No se puede crear una propiedad si no existen Mejoras en el sistema.</h2>
+}else{
+<div class="w-100 bg-whitegray d-flex flex-row justify-content-between align-items-center" style="height: 82.4vh">
+
+    <form method="post" asp-controller="Agent" asp-action=@(update? "UpdatePropiedad" : "CreatePropiedad") enctype = "multipart/form-data" class="w-75 p-2 rounded bg-white mx-auto shadow-sm d-flex flex-row flex-wrap justify-content-evenly align-items-center">
+               
+        <div class="w-75 d-flex flex-column justify-content-center align-items-center">
+            <section class="w-auto p-4 rounded-circle bg-purple text-white d-flex flex-row justify-content-center align-items-center">
+                <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="60" height="60"><path d="M10.5 14.49v.5h.5v-.5h-.5zm-10 0H0v.5h.5v-.5zm7-4.996v.5-.5zm-4 0v-.5.5zM8 3.498a2.499 2.499 0 01-2.5 2.498v1C7.433 6.996 9 5.43 9 3.498H8zM5.5 5.996A2.499 2.499 0 013 3.498H2a3.499 3.499 0 003.5 3.498v-1zM3 3.498A2.499 2.499 0 015.5 1V0A3.499 3.499 0 002 3.498h1zM5.5 1A2.5 2.5 0 018 3.498h1A3.499 3.499 0 005.5 0v1zm5 12.99H.5v1h10v-1zm-9.5.5v-1.996H0v1.996h1zm2.5-4.496h4v-1h-4v1zm6.5 2.5v1.996h1v-1.997h-1zm-2.5-2.5a2.5 2.5 0 012.5 2.5h1a3.5 3.5 0 00-3.5-3.5v1zm-6.5 2.5a2.5 2.5 0 012.5-2.5v-1a3.5 3.5 0 00-3.5 3.5h1zM12 5v5h1V5h-1zm-2 3h5V7h-5v1z" fill="currentColor"></path></svg>
+            </section>
+            <h2>Registro</h2>
+        </div>
+        <input type="hidden" asp-for="Id" />
+        <div class="w-25 mx-1">                
+            <label asp-for="TipoPropiedadId" class="form-label text-sm-left">Tipo Propiedad: </label>     
+            <select asp-for="TipoPropiedadId" asp-items="@(new SelectList(TiposPropiedad,"Id","Name"))" class="form-select">
+                            <option value="0">Seleccione una opcion</option>
+                        </select>
+            @*<input required asp-for="TipoPropiedad" class="form-control bg-whitegray" />*@
+            <span asp-validation-for="TipoPropiedadId" class="text-danger"></span>
+        </div>
+                         
+        <div class="w-25 mx-1">
+            <label asp-for="TipoVentaId" class="form-label text-sm-left">Tipo Venta: </label>
+             <select asp-for="TipoVentaId" asp-items="@(new SelectList(TiposVenta,"Id","Name"))" class="form-select">
+                            <option value="0">Seleccione una opcion</option>
+                        </select>
+            @*<input required asp-for="TipoVenta" class="form-control bg-whitegray" />*@
+            <span asp-validation-for="TipoVentaId" class="text-danger"></span>
+        </div>
+
+        <div class="w-25 mx-1">
+            <label asp-for="MejorasId" class="form-label text-sm-left">Mejora: </label>
+             <select asp-for="MejorasId" asp-items="@(new SelectList(Mejoras,"Id","Name"))" class="form-select">
+                            <option value="0">Seleccione una opcion</option>
+                        </select>
+            @*<input required asp-for="TipoVenta" class="form-control bg-whitegray" />*@
+            <span asp-validation-for="MejorasId" class="text-danger"></span>
+        </div>
+
+        <div class="w-25 mx-1">
+            <label asp-for="Precio" class="form-label text-sm-left">Precio: </label>
+            <input required type="number" asp-for="Precio" class="form-control bg-whitegray" />
+            <span asp-validation-for="Precio" class="text-danger"></span>
+        </div>
+
+               
+        <div class="w-25 mx-1">                
+            <label asp-for="Descripcion" class="form-label text-sm-left">Descripcion: </label>
+            <input required asp-for="Descripcion" class="form-control bg-whitegray" />
+            <span asp-validation-for="Descripcion" class="text-danger"></span>
+        </div>
+
+        <div class="w-25 mx-1">                
+            <label asp-for="Metros" class="form-label text-sm-left">Tamaño: </label>
+            <input required type="number" asp-for="Metros" class="form-control bg-whitegray" />
+            <span asp-validation-for="Metros" class="text-danger"></span>
+        </div>
+
+         <div class="w-25 mx-1">
+            <label asp-for="CantHabitaciones" class="form-label text-sm-left">Cantidad habitaciones: </label>
+            <input required type="number" asp-for="CantHabitaciones" class="form-control bg-whitegray" />
+            <span asp-validation-for="CantHabitaciones" class="text-danger"></span>
+        </div>
+
+        <div class="w-25 mx-1">
+            <label asp-for="CantBanos" class="form-label text-sm-left">Cantidad baños: </label>
+            <input required type="number" asp-for="CantBanos" class="form-control bg-whitegray" />
+            <span asp-validation-for="CantBanos" class="text-danger"></span>
+        </div>
+
+
+
+        <div class="w-25 mx-1">
+            <label asp-for="File" class="form-label">Seleccione fotos del anuncio:</label>
+            <input required asp-for="File" class="form-control" />
+                            <input  asp-for="File2" class="form-control" />
+                            <input  asp-for="File3" class="form-control" />
+                            <input  asp-for="File4" class="form-control" />
+        </div>
+                
+        <div class="w-100 mx-1 text-center mt-3 mb-2">
+            <button type="submit" class="btn btn-purple"> @(update? "Actualizar" : "Guardar") </button>
+            <a asp-controller="Agent" asp-action="MantenimientoPropiedades" class="btn btn-light">Volver atras</a>
+
+        </div>
+
+    </form>
+    
+</div>
+
+                            }
