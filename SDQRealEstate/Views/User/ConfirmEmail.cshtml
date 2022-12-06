@@ -4,10 +4,21 @@
     ViewData["Title"] = "Confirm";
 }
 
-<div class="w-100 bg-whitegray d-flex flex-row justify-content-between align-items-center" style="height: 82.4vh">
-    <div class="alert bg-purple alert-dismissible fade show mx-auto" role="alert">
-        <h2 class="text-light">@Model - <a class="btn btn-light" asp-controller="User" asp-action="Index"> Sign in</a></h2>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-</div>
+<div 
+    class='bg- d-flex flex-row justify-content-center align-items-center' 
+    style="width: 100%; min-height: 83.9vh; height: auto"
+>
+    <!-- Section -->
+    <section class="w-50 mx-auto d-flex flex-column justify-content-center align-items-center gap-2 p-2">
+        <h2 class="text-right">¡Confirmación de tu Email!</h2>
+        <small class='w-75 text-muted text-center'>@Model</small>
 
+        <a class="btn btn-light w-75 my-2" asp-controller="User" asp-action="Index">Inicio Sesión</a>
+    </section>
+
+    <!-- Image of Error -->
+    <section class="w-75 h-100  p-0 rounded overflow-hidden mx-4">
+        <img src='/Images/Predeterminated/changepassword.png' alt='main login image' class='w-100' />
+    </section>
+
+</div>

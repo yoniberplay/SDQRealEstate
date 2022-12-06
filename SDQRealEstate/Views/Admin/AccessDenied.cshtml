@@ -1,13 +1,24 @@
-﻿
-@model string
-@{
-    ViewData["Title"] = "Access Denied";
+﻿@{
+    ViewData["Title"] = "Acceso denegado";
 }
 
-<div class="w-100 bg-whitegray d-flex flex-row justify-content-between align-items-center" style="height: 82.4vh">
-    <div class="alert bg-purple alert-dismissible fade show mx-auto" role="alert">
-        <h2 class="text-danger">No tiene permiso para acceder a esta seccion - <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Volver</a></h2>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+<div 
+    class='bg- d-flex flex-row justify-content-center align-items-center' 
+    style="width: 100%; min-height: 83.9vh; height: auto"
+>
+    
+    <!-- Image of Error -->
+    <section class="w-75 h-100  p-0 rounded overflow-hidden mx-4">
+        <img src='/Images/Predeterminated/error.png' alt='main login image' class='w-100' />
+    </section>
+
+    <!-- Section -->
+    <section class="w-50 mx-auto d-flex flex-column justify-content-center align-items-center gap-2 p-2">
+        <h2 class="text-right">¡Oops!</h2>
+        <small class='w-75 text-muted text-right'>Si está viendo esto es porque no tiene permiso para acceder a esta sección.</small>
+
+        <a class="btn btn-light w-75 my-2" asp-controller="Home" asp-action="Index">Volver</a>
+    </section>
+
 </div>
 

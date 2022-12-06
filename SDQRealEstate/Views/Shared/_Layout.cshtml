@@ -14,7 +14,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Internet_banking</title>
+    <title>@ViewData["Title"] - ExoState</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Internet_banking.styles.css" asp-append-version="true" />
@@ -22,10 +22,10 @@
     <!-- Font Awesome CSS -->
     @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">*@
 </head>
-<body>
+<body class="m-0">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
-            <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow w-100 d-flex justify-content-between px-2">
+            <div class="d-flex flex-row justify-content-between align-items-center px-2">
                 
                 @if (User != null)
                 {
@@ -43,15 +43,11 @@
                          
                     }
 
-                    <a class="navbar-brand" asp-area="" asp-controller="@controlador" asp-action="Index">
-                            <img width="150" height="30" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
-                        </a>
+                    <a class="navbar-brand" asp-area="" asp-controller="@controlador" asp-action="Index">ExoState</a>
                 } 
                 else
                 {
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
-                        <img width="150" height="30" src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5WMTNVBS63LA9rvPMuCtHehqx8oGNcws70cYIvIEhOqXQtp4QMtFvtQ9cDtuqPc0QOQ&usqp=CAU' alt='' />
-                    </a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExoState</a>
                 }
              
                 <div class="navbar-collapse  collapse d-sm-inline-flex justify-content-between">
@@ -60,63 +56,68 @@
                         {                        
                             if(isAdmin)
                             {
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Admin" asp-action="Index">Inicio</a>
-                                     <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Admin" asp-action="agentes">Listado Agentes</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Admin" asp-action="Index">Inicio</a>
+                                     <a class="nav-link fw-bold" asp-area="" asp-controller="Admin" asp-action="agentes">Listado Agentes</a>
                                      <li class="nav-item dropdown">
                                           <a class="nav-link dropdown-toggle text-primary fw-bold" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Mantenimiento
                                           </a>
                                           <ul class="dropdown-menu " aria-labelledby="navbarDropdown">
-                                                <li><a asp-controller="Admin" asp-action="Administradores" class="dropdown-item nav-link text-primary">Administradores</a></li>
-                                                <li><a asp-controller="Admin" asp-action="Desarrolladores" class="dropdown-item nav-link text-primary">Desarrolladores</a></li>
-                                                <li><a asp-controller="Admin" asp-action="propiedades" class="dropdown-item nav-link text-primary">Tipo de propiedades</a></li>
-                                                <li><a asp-controller="Admin" asp-action="ventas" class="dropdown-item nav-link text-primary">Tipo de ventas</a></li>
-                                                <li><a asp-controller="Admin" asp-action="mejora" class="dropdown-item nav-link text-primary">Mejoras</a></li>
+                                                <li><a asp-controller="Admin" asp-action="Administradores" class="dropdown-item nav-link">Administradores</a></li>
+                                                <li><a asp-controller="Admin" asp-action="Desarrolladores" class="dropdown-item nav-link">Desarrolladores</a></li>
+                                                <li><a asp-controller="Admin" asp-action="propiedades" class="dropdown-item nav-link">Tipo de propiedades</a></li>
+                                                <li><a asp-controller="Admin" asp-action="ventas" class="dropdown-item nav-link">Tipo de ventas</a></li>
+                                                <li><a asp-controller="Admin" asp-action="mejora" class="dropdown-item nav-link">Mejoras</a></li>
                                           </ul>
                                     </li>
 
                             }else if(isClient){
 
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Client" asp-action="Index">Inicio</a>
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Client" asp-action="Home">Agentes</a>
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Client" asp-action="Home">Mis propiedades</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Client" asp-action="Index">Inicio</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Client" asp-action="Home">Agentes</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Client" asp-action="Home">Mis propiedades</a>
 
                             }else if(isAgent){
                                 
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Inicio</a>
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Mi Perfil</a>
-                                    <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Mantenimiento de propiedades</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Inicio</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Mi Perfil</a>
+                                    <a class="nav-link fw-bold" asp-area="" asp-controller="Agent" asp-action="Index">Mantenimiento de propiedades</a>
 
                             }
 
                             <li class="nav-item align-content-end">
-                                <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="LogOut">Cerrar session (@(User.UserName))</a>
+                                <a class="nav-link fw-bold" asp-area="" asp-controller="User" asp-action="LogOut">Cerrar session (@(User.UserName))</a>
                             </li>
 
                         }
                         else
                         {
                             <li class="nav-item align-content-end">
-                                <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="Create">Unete a la App</a>
+                                <a class="nav-link fw-bold" asp-area="" asp-controller="User" asp-action="Create">Unete a la App</a>
                             </li>
                              <li class="nav-item align-content-end">
-                                <a class="nav-link text-primary fw-bold" asp-area="" asp-controller="User" asp-action="Index">Iniciar Sesion</a>
+                                <a class="nav-link fw-bold" asp-area="" asp-controller="User" asp-action="Index">Iniciar Sesion</a>
                             </li>
                         }
                     </ul>
                 </div>
             </div>
+
+            <!-- This is for the icon of company -->
+            <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class='rounded bg-success bg-opacity-75 py-2 text-light'>
+                <path d="M.5 5.5l-.29-.407-.21.15V5.5h.5zm7-5l.29-.407a.5.5 0 00-.58 0L7.5.5zm7 5h.5v-.257l-.21-.15-.29.407zm-12 3V8H2v.5h.5zm4 0H7V8h-.5v.5zM1 15V5.5H0V15h1zM.79 5.907l7-5-.58-.814-7 5 .58.814zm6.42-5l7 5 .58-.814-7-5-.58.814zM14 5.5V15h1V5.5h-1zM3 15V8.5H2V15h1zm-.5-6h4V8h-4v1zM6 8.5V15h1V8.5H6zM5 12h1.5v-1H5v1zm6-4v4h1V8h-1zm2-6v2.5h1V2h-1z" fill="currentColor"></path>
+            </svg>
         </nav>
     </header>
-    <div>
+    <div style="width: 100%; min-height: 84.4vh; height: auto"> 
         <main role="main">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top bg-dark footer text-white text-muted fixed-bottom">
-        <div class="container text-center">
-            &copy; 2022 - Internet_banking - <a asp-area="" asp-controller="Home" asp-action="Privacy">Contribuyentes</a>
+    <footer class="footer text-light">
+        <div class="text-center bg-dark py-3">
+            &copy; 2022 - ExoState - <a asp-area="" asp-controller="Home" asp-action="Privacy">Github</a>
         </div>
     </footer>
     @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>*@

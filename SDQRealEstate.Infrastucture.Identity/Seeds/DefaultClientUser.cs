@@ -32,7 +32,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Seeds
                 if (user == null)
                 {
                     await userManager.CreateAsync(defaultUser, "Onell00+");
-                    await userManager.AddToRoleAsync(defaultUser,Roles.Cliente.ToString());
+                    await userManager.AddToRoleAsync(defaultUser, Roles.Cliente.ToString());
 
                 }
 

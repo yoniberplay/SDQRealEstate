@@ -40,7 +40,7 @@ namespace WebApp.SDQRealEstate.Controllers
             _httpContextAccessor = httpContextAccessor;
             _ipropiedadService = ipropiedadService;
             _imejoraService = imejoraService;
-            _userLogged = _httpContextAccessor.HttpContext.Session.Get<AuthenticationResponse>("user");
+            _userLogged = _httpContextAccessor?.HttpContext?.Session.Get<AuthenticationResponse>("user");
         }
 
 
@@ -91,7 +91,7 @@ namespace WebApp.SDQRealEstate.Controllers
         public async Task<IActionResult> agentesAsync()
         {
             ViewBag.UsersAgent = await _manageuserService.GetbyRolList("Agente");
-            ViewBag.currentuser = _userLogged.Id;
+            ViewBag.currentuser = _userLogged?.Id;
 
             return View();
         }

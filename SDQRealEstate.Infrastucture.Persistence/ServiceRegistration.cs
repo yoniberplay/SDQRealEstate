@@ -26,7 +26,7 @@ namespace SDQRealEstate.Infrastructure.Persistence
             else
             {
                 services.AddDbContext<ApplicationContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection2"),
                 m=> m.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName)));
             }
             #endregion
