@@ -24,7 +24,8 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         [DataType(DataType.Text)]
         public int? MejorasId { get; set; }
 
-        public string? ImgUrl { get; set; }
+        public String? ImgUrl { get; set; }
+
 
         [Required(ErrorMessage = "Debe colocar el precio de la propiedad")]
         [DataType(DataType.Text)]
@@ -46,7 +47,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         [DataType(DataType.Text)]
         public int Metros { get; set; }
 
-        [Required(ErrorMessage = "Debe agregar al menos una foto")]
+        
         [DataType(DataType.Upload)]
         public IFormFile? File { get; set; }
 

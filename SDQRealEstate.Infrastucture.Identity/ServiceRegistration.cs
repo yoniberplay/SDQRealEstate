@@ -29,7 +29,7 @@ namespace SDQRealEstate.Infrastructure.Identity
             else
             {
                 services.AddDbContext<IdentityContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection2"),
+                options.UseSqlServer(configuration.GetConnectionString("IdentityConnection"),
                 m=> m.MigrationsAssembly(typeof(IdentityContext).Assembly.FullName)));
             }
             #endregion

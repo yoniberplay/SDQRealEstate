@@ -63,17 +63,17 @@ namespace WebApp.SDQRealEstate.Controllers
         [HttpPost]
         public async Task<IActionResult> CreatePropiedad(SavePropiedadViewModel sv)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid || sv.File == null)
             {
                 ViewBag.TipoPropiedad = await _itipoPropiedadService.GetAllViewModel();
                 ViewBag.Venta = await _itipoVentaService.GetAllViewModel();
                 ViewBag.Mejoras = await _imejoraService.GetAllViewModel();
                 return View(sv);
             }
+
             sv.UserId = _userLogged.Id;
             sv.ImgUrl = "None";
             var proptemp = await _ipropiedadService.Add(sv);
-            //String ImgTemp = AdmFiles.UploadFile(sv.File, _userLogged.Id,"Propiedades");
 
             if (proptemp.Id != 0 && proptemp != null)
 
@@ -113,25 +113,29 @@ namespace WebApp.SDQRealEstate.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(sv);
+                return View(sv);    
             }
+            sv.UserId = _userLogged.Id;
 
+            if (sv.File != null)
+            {
+                sv.ImgUrl = AdmFiles.UploadFile(sv.File, sv.Id.ToString(), "Propiedades");
+            }
             await _ipropiedadService.Update(sv, sv.Id);
             return RedirectToRoute(new { controller = "Agent", action = "MantenimientoPropiedades" });
 
         }
-        public async Task<IActionResult> MiPerfil()
+
+        public async Task<IActionResult> UpdatePropiedad(int id)
         {
-            
-            return View();
+            ViewBag.TipoPropiedad = await _itipoPropiedadService.GetAllViewModel();
+            ViewBag.Venta = await _itipoVentaService.GetAllViewModel();
+            ViewBag.Mejoras = await _imejoraService.GetAllViewModel();
+
+            SavePropiedadViewModel temp = await _ipropiedadService.GetByIdSaveViewModel(id);
+
+            return View("CreatePropiedad", temp);
         }
-
-        public async Task<IActionResult> EditPropiedad(int id)
-        {
-
-            return View();
-        }
-
 
         public async Task<IActionResult> DeletePropiedad(int id)
         {
@@ -145,6 +149,12 @@ namespace WebApp.SDQRealEstate.Controllers
             await _ipropiedadService.Delete(us.Id);
 
             return RedirectToRoute(new { controller = "Agent", action = "MantenimientoPropiedades" });
+        }
+
+        public async Task<IActionResult> MiPerfil()
+        {
+
+            return View();
         }
         public IActionResult AccessDenied()
         {

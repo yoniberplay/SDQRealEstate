@@ -48,8 +48,8 @@ namespace SDQRealEstate.Core.Application.ViewModels.User
 
         public string? Foto { get; set; }
 
-        [Required(ErrorMessage = "Tiene que usar una foto para mostrar a los demas")]
-        [DataType(DataType.Upload)]
+        //[Required(ErrorMessage = "Tiene que usar una foto para mostrar a los demas")]
+        //[DataType(DataType.Upload)]
         public IFormFile? File { get; set; }
 
         public bool HasError { get; set; } 

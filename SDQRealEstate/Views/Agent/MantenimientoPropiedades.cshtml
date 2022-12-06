@@ -31,7 +31,7 @@
                             <p class="card-text">@item.Descripcion</p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a asp-controller="Agent" asp-action="EditPropiedad" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                                    <a asp-controller="Agent" asp-action="UpdatePropiedad" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Editar</a>
                                     <a asp-controller="Agent" asp-action="DeletePropiedad" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Borrar</a>
                                 </div>
                                 <small class="fw-bold fs-6">$@item.Precio</small>

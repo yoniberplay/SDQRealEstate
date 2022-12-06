@@ -184,7 +184,7 @@ namespace WebApp.SDQRealEstate.Controllers
             if (!ModelState.IsValid)
             {
                 sv.HasError = true;
-                return View(sv);
+                return View("CreateAdmin", sv);
 
             }
 
@@ -196,7 +196,12 @@ namespace WebApp.SDQRealEstate.Controllers
             usertemp.Email = sv.Email;
             usertemp.PhoneNumber = sv.Phone;
             usertemp.UserName = sv.Username;
-            usertemp.Foto = AdmFiles.UploadFile(sv.File, usertemp.Id, "Users");
+
+            if (sv.File!=null)
+            {
+                usertemp.Foto = AdmFiles.UploadFile(sv.File, usertemp.Id, "Users");
+            }
+            
 
             await _userManager.UpdateAsync(usertemp);
 
