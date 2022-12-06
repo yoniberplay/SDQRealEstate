@@ -49,13 +49,16 @@ namespace SDQRealEstate.Core.Application.Mappings
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
             CreateMap<Propiedad, SavePropiedadViewModel>()
-                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                //.ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.File, opt => opt.Ignore())
                 .ForMember(dest => dest.File2, opt => opt.Ignore())
                 .ForMember(dest => dest.File3, opt => opt.Ignore())
                 .ForMember(dest => dest.File4, opt => opt.Ignore())
                .ReverseMap()
                .ForMember(dest => dest.fotos, opt => opt.Ignore())
+               .ForMember(dest => dest.tipoVenta, opt => opt.Ignore())
+                .ForMember(dest => dest.tipoPropiedades, opt => opt.Ignore())
+                .ForMember(dest => dest.Mejoras, opt => opt.Ignore())
                .ForMember(dest => dest.Created, opt => opt.Ignore())
                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                .ForMember(dest => dest.LastModified, opt => opt.Ignore())

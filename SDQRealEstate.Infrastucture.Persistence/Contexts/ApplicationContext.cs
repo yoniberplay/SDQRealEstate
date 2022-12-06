@@ -101,6 +101,12 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             .HasForeignKey(p => p.TipoPropiedadId)
             .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<Mejora>()
+            .HasMany<Propiedad>(f => f.propiedad)
+            .WithOne(P => P.Mejoras)
+            .HasForeignKey(p => p.MejorasId)
+            .OnDelete(DeleteBehavior.Cascade);
+
             #endregion
 
             #region "Property configurations"

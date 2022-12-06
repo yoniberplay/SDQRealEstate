@@ -14,12 +14,17 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
 
         [Required(ErrorMessage = "Debe colocar el Tipo de Propiedad")]
         [DataType(DataType.Text)]
-        public string? TipoPropiedad { get; set; }
+        public int? TipoPropiedadId { get; set; }
 
         [Required(ErrorMessage = "Debe colocar el Tipo de Venta")]
         [DataType(DataType.Text)]
-        public string? TipoVenta { get; set; }
-        public string? ImageUrl { get; set; }
+        public int? TipoVentaId { get; set; }
+
+        [Required(ErrorMessage = "Debe colocar la mejora")]
+        [DataType(DataType.Text)]
+        public int? MejorasId { get; set; }
+
+        public string? ImgUrl { get; set; }
 
         [Required(ErrorMessage = "Debe colocar el precio de la propiedad")]
         [DataType(DataType.Text)]
@@ -54,7 +59,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         [DataType(DataType.Upload)]
         public IFormFile? File4 { get; set; }
 
-        [Required(ErrorMessage = "Inserte el Id del usuario")]
+       
         public String? UserId { get; set; }
 
 
