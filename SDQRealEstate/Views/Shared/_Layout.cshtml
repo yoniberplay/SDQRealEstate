@@ -47,6 +47,7 @@
                 else
                 {
                     <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExoState</a>
+                   
                 }
              
                 <div class="navbar-collapse  collapse d-sm-inline-flex justify-content-between">
@@ -91,6 +92,9 @@
                         }
                         else
                         {
+                            <li class="nav-item align-content-end">
+                                 <a class="nav-link fw-bold" asp-area="" asp-controller="Home" asp-action="Agentes">Agentes</a>
+                            </li>
                             <li class="nav-item align-content-end">
                                 <a class="nav-link fw-bold" asp-area="" asp-controller="User" asp-action="Create">Unete a la App</a>
                             </li>

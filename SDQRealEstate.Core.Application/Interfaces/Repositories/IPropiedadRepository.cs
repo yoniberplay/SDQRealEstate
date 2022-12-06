@@ -10,5 +10,6 @@ namespace SDQRealEstate.Core.Application.Interfaces.Repositories
     public interface IPropiedadRepository : IGenericRepository<Propiedad>
     {
         Task<Propiedad> GetBywithRelationship(int id);
+        Task<List<Propiedad>> GetAllViewModelIcnlude();
     }
 }

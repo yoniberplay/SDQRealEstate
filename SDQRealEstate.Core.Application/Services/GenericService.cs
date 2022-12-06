@@ -59,12 +59,9 @@ namespace SDQRealEstate.Core.Application.Services
 
         }
 
-
-
         public virtual async Task<List<ViewModel>> GetAllViewModel()
         {
             var userList = await _repository.GetAllAsync();
-
             return _mapper.Map<List<ViewModel>>(userList);
 
         }

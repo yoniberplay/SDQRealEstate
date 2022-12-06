@@ -29,15 +29,16 @@ namespace SDQRealEstate.Infrastructure.Persistence.Repositories
             throw new NotImplementedException();
         }
 
-        //public virtual async Task<Post> GetBywithRelationship(int id)
-        //{
-        //    var temp = await _dbContext.Set<Post>().Where(a => a.Id == id).Include(a => a.User).ToListAsync();
-        //    return temp.First();
+        public virtual async Task<List<Propiedad>> GetAllViewModelIcnlude()
+        {
+            var temp = await _dbContext.Set<Propiedad>().Include(a => a.tipoVenta).Include(a => a.tipoPropiedades).Include(a => a.Mejoras).Include(a => a.fotos)
+                .ToListAsync();
+            return temp;
 
-        //    //POR SI ACASO
-        //    //  return _dbContext.Posts.Where(a => a.Id == id).Include(a => a.Fotos).Include(a => a.User).Include(a => a.Category).FirstOrDefault(); 
-        //    //return a;
-        //}
+            //POR SI ACASO
+            //  return _dbContext.Posts.Where(a => a.Id == id).Include(a => a.Fotos).Include(a => a.User).Include(a => a.Category).FirstOrDefault(); 
+            //return a;
+        }
 
 
     }

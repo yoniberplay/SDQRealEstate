@@ -53,6 +53,14 @@ namespace SDQRealEstate.Core.Application.Services
             return temp.Where(x => x.UserId == AgentId).ToList();
 
         }
+
+        public virtual async Task<List<PropiedadViewModel>> GetAllViewModelIcnlude()
+        {
+            var userList = await _propiedadRepository.GetAllViewModelIcnlude();
+
+            return _mapper.Map<List<PropiedadViewModel>>(userList);
+
+        }
     }
        
     }

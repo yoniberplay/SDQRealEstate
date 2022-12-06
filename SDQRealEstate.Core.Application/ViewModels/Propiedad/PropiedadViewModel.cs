@@ -1,4 +1,7 @@
 ﻿using SDQRealEstate.Core.Application.ViewModels.Fotos;
+using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
+using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +16,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         public String? UserId { get; set; }
         public String? TipoPropiedad { get; set; }
         public String? TipoVenta { get; set; }
-        public String? Mejoras { get; set; }
+        //public String? Mejoras { get; set; }
         public String? ImgUrl { get; set; }
         public int MejorasId { get; set; }
 
@@ -25,6 +28,9 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
         public int Metros { get; set; }
 
         public ICollection<FotoViewModel>? fotos;
+        public TipoPropiedadViewModel? tipoPropiedades { get; set; }
+        public TipoVentaViewModel? tipoVenta { get; set; }
+        public MejoraViewModel? Mejoras { get; set; }
 
     }
 }

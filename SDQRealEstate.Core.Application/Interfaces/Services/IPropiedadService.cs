@@ -15,6 +15,6 @@ namespace SDQRealEstate.Core.Application.Interfaces.Services
         Task<int> GetCantidadMejora(int id);
 
         Task<List<PropiedadViewModel>> GetAllPropiedadByAgentId(String AgentId);
-
+        Task<List<PropiedadViewModel>> GetAllViewModelIcnlude();
     }
 }
