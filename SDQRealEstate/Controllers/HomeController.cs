@@ -55,9 +55,20 @@ namespace WebApp.SDQRealEstate.Controllers
             return View();
         }
 
-        public IActionResult Agentes()
+        public async Task<IActionResult> AgentesAsync()
         {
+            var temp = await _userManager.GetUsersInRoleAsync("Agente");
+            return View(temp.ToList());
+        }
+
+        public async Task<IActionResult> PropiedadesAgente(String id)
+        {
+            var temp = await _ipropiedadService.GetAllViewModelIcnlude();
+            ViewBag.listapropiedades = temp.ToList().Where(x => x.UserId == id).ToList();
+            var usertemp  = _userManager.Users.Where(i => i.Id == id).ToList().FirstOrDefault();
+            ViewBag.agente = usertemp;
             return View();
+
         }
 
         public IActionResult Privacy()

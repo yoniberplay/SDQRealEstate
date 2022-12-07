@@ -1,0 +1,28 @@
+﻿@using SDQRealEstate.Infrastructure.Identity.Entities;
+@model List<ApplicationUser>
+@{
+    ViewData["Title"] = "Agentes";
+}
+
+<div class="cards-wrapper">
+
+     <div class="row row-cols-4 m-2">
+        
+            @foreach(var item in Model)
+    {
+        <a asp-controller="Home" asp-action="PropiedadesAgente" asp-route-id="@item.Id" class="text-reset text-decoration-none ">
+        <div class="card zoom " style="width: 18rem; background-color: #C7DBD2 ">
+    <h4 class="card-title mt-2" align="center"> <strong>@item.FirstName @item.LastName</strong> </h4>
+  <img class="card-img-top " src="@item.Foto" alt="Card image cap">
+  <div class="card-body">
+   @* <p class="card-text"> @item.Email
+        <br/>
+    <strong>Tipos: </strong> @item.tipos.Name @item.SecondaryType
+     <br/>
+    <strong>Region: </strong>  @item.regions.Name*@
+  </div>
+</div>
+</a>
+    }
+    </div>
+</div>
