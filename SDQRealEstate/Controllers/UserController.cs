@@ -37,6 +37,14 @@ namespace WebApp.SDQRealEstate.Controllers
             {
                 HttpContext.Session.Set<AuthenticationResponse>("user", userVm);
 
+
+                var Desarrollador = User != null ? userVm.Roles.Any(r => r == "Desarrollador") : false;
+                if (Desarrollador)
+                {//no tiene permiso para usar la web app.
+                    HttpContext.Session.Remove("user");
+                    return RedirectToRoute(new { controller = "Home", action = "NoPermiso" });
+                }
+
                 var isAdmin = User != null ? userVm.Roles.Any(r => r == "Admin") : false;
                 var isClient = User != null ? userVm.Roles.Any(r => r == "Cliente") : false;
                 var isAgent = User != null ? userVm.Roles.Any(r => r == "Agente") : false;
