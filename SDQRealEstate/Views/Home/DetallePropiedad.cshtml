@@ -1,0 +1,92 @@
+﻿@using SDQRealEstate.Core.Application.ViewModels.Propiedad;
+@using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
+@using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+@using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+@using SDQRealEstate.Core.Application.ViewModels.Fotos;
+@using SDQRealEstate.Infrastructure.Identity.Entities;
+@model PropiedadViewModel
+@{
+    //String fecha = Model.Created.Value.ToString("dd MMMM yyyy");
+    FotoViewModel[] fotos = ViewBag.fotos;
+    ApplicationUser user = ViewBag.agente;
+}
+
+  <div class=" d-flex align-items-center justify-content-center mt-3" >
+
+      <div class="row w-50">
+       <div class="card-header bg-black text-light">
+                    <h4 style="text-align: center;"> <b>@Model.tipoPropiedades.Name</b> </h4>
+                </div>
+  <div class="card-body col-md-7">
+    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active" >
+      <img src="@fotos[0].ImageUrl" class="d-block w-100" width="800" height="400">
+    </div>
+    @for (int i = 1; i < fotos.Count(); i++) 
+                    {
+              <div class="carousel-item">
+ <img class="d-block w-100" src="@fotos[i].ImageUrl"  width="800" height="400">
+  </div>
+                    }
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+  </div>
+
+  <div class="col-md-5 mt-5">
+<table class="table caption-top mb-0">
+  <thead>
+    <tr>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="d-flex justify-content-between align-items-center">
+           @*<i class="text-muted">Publicado @fecha</i>*@
+          <span class="fw-bold">@Model.tipoVenta.Name</span>
+          @*<small class="fw-bold fs-6">$@Model.Price</small>*@
+         
+          </td>
+    </tr>
+    <tr>
+      <td>@Model.Descripcion</td>
+    </tr>
+    <tr>
+      <td class="fw-bold text-lg">
+           RD$ @Model.Precio
+      </td>
+    </tr>
+    <tr>
+      <td class="text-center fw-bold text-lg text-light bg-black"> 
+          <h5>Contacto</h5>
+      </td>
+    </tr>
+     <tr>
+      <td class="text-center fw-bold text-lg"> @user.FirstName @user.LastName</td>
+    </tr>
+     <tr>
+      <td class="text-center fw-bold text-lg"> @user.PhoneNumber</td>
+    </tr>
+     <tr>
+      <td class="text-center fw-bold text-lg"> @user.Email</td>
+    </tr>
+  </tbody>
+</table>
+  <div class="card-body text-center">
+    <a href="tel:+1 @user.PhoneNumber " class="btn btn-sm btn-success fa fa-phone"> Llamar</a>
+    <a href = "mailto: @user.Email" class="btn btn-sm btn-success fa fa-envelope "> Correo</a>
+
+  </div></div>
+
+  </div>
+</div>
+

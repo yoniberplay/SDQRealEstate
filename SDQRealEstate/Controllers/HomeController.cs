@@ -111,6 +111,22 @@ namespace WebApp.SDQRealEstate.Controllers
             return View("Index",fp);
         }
 
+
+        public async Task<IActionResult> DetallePropiedad(int id)
+        {
+            var temp = await _ipropiedadService.GetAllViewModelIcnlude();
+
+            var detalles = temp.ToList().Where(x => x.Id ==id).FirstOrDefault();
+
+            ViewBag.fotos = detalles.fotos.ToArray();
+
+            var usertemp = _userManager.Users.Where(i => i.Id == detalles.UserId).ToList().FirstOrDefault();
+            ViewBag.agente = usertemp;
+
+            return View(detalles);
+
+        }
+
         public IActionResult Privacy()
         {
             return View();
@@ -121,5 +137,7 @@ namespace WebApp.SDQRealEstate.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
