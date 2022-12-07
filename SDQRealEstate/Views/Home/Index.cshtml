@@ -1,8 +1,15 @@
 ﻿@using SDQRealEstate.Core.Application.ViewModels.Propiedad;
-
+@using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
+@using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
+@using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+@using SDQRealEstate.Core.Application.Enums;
+@model FilterPropiedad;
 @{
     ViewData["Title"] = "Home Page";
     List<PropiedadViewModel> list = ViewBag.listapropiedades;
+    List<TipoPropiedadViewModel> TiposPropiedad = ViewBag.TipoPropiedad;
+    List<TipoVentaViewModel> TiposVenta = ViewBag.Venta;
+    List<MejoraViewModel> Mejoras = ViewBag.Mejoras;
 }
 
 <div 
@@ -66,40 +73,43 @@
 
 
         <div class='w-25 border h-100 p-2 rounded bg-success bg-opacity-75' style='display: sticky; top: 0;'>
-            <form class='text-white'>
+            <form method="post" asp-controller="Home" asp-action="Busqueda" class='text-white'>
+            @*<form class='text-white'>*@
                 <h2>Filtros</h2>
                 <small class='w-75'>Puede filtrar por los diferentes campos</small>
 
                 <hr />
 
                 <div class='w-100'>
-                    <label class='form-label'>Categorías</label>
-                    <select class='form-control'>
-                        <option value='0'>Seleccione 1 para filtrar</option>
-                    </select>
+                       <label asp-for="Codigo" class="form-label ">Codigo: </label>
+            <input asp-for="Codigo" class="form-control bg-whitegray" />
+            <span asp-validation-for="Codigo" class="text-danger"></span>
                 </div>
 
-                <hr />
-
                 <div class='w-100'>
-                    <label class='form-label'>Precios</label>
-                    <section class='w-100 d-flex flex-row justify-content-evenly align-items-center'>
-                        <input class='form-control w-50 mx-2' />
-                        <input class='form-control w-50' /> 
-                    </section>
-                </div>
-
-                <hr />
-                <div class='w-100'>
-                    <label class='form-label'>Precios</label>
-                    <section class='w-100 d-flex flex-row justify-content-evenly align-items-center'>
-                        <select class='form-select'>
-                            <option value='0'>Seleccione #1</option>
-                            <option value='1'>Habitacion/es</option>
-                            <option value='2'>Baño/s</option>
+                     <label asp-for="TipoPropiedadId" class="form-label text-sm-left">Tipo Propiedad: </label>     
+            <select asp-for="TipoPropiedadId" asp-items="@(new SelectList(TiposPropiedad,"Id","Name"))" class="form-select">
+                            <option value="0">Seleccione una opcion</option>
                         </select>
-                        <input class='form-control w-50 mx-2' />
-                    </section>
+            <span asp-validation-for="TipoPropiedadId" class="text-danger"></span>
+                </div>
+
+                <hr />
+
+                <div class='w-100'>
+                    <label asp-for="Codigo" class="form-label ">Precios: </label>
+            <input asp-for="PrecioMin" placeholder="Minimo" class="form-control bg-whitegray " />
+            <input asp-for="PrecioMax" placeholder="Maximo" class="form-control bg-whitegray " />
+                </div>
+
+                <div class='w-100'>
+                    <label asp-for="CantBanos" class="form-label ">Cantidad baños: </label>
+            <input asp-for="CantBanos" class="form-control bg-whitegray " />
+                </div>
+
+                <div class='w-100'>
+                    <label asp-for="CantHabitaciones" class="form-label ">Cantidad Habitaciones: </label>
+            <input asp-for="CantHabitaciones" class="form-control bg-whitegray " />
                 </div>
 
                 <hr />
