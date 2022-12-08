@@ -16,13 +16,18 @@
     class=' d-flex flex-column justify-content-evenly align-items-center mx-auto' 
     style="width: 98%; min-height: 84.4vh; height: auto"
 >
+   
+    <!-- This is the image -->
+    <section class="w-100 rounded overflow-hidden mx-5 mt-2">
+        <img src='images/predeterminated/main_nosignin.png' alt='main login image' style='width: 100%; height: 25rem; filter: brightness(90%);' />
+    </section>
 
     <!--  -->
     <section class='w-100 d-flex flex-column justify-content-center'>
         
         <!-- Introduction -->
         <h1 class='text-center mt-5'>¡Bienvenido a ExoState!</h1>
-        <p class='text-muted text-center mb-5'>La página donde podrás encontrar las mejores ofertas y oportunidades para encontrar un lugar cómodo.</p>
+        <p class='text-muted text-center mb-2'>La página donde podrás encontrar las mejores ofertas y oportunidades para encontrar un lugar cómodo.</p>
         <hr class='w-25 mx-auto' />
 
         <section class="w-100 rounded overflow-hidden d-flex flex-row">
@@ -74,44 +79,45 @@
         </div>
 
 
-        <div class='w-25 border h-100 p-2 rounded bg-success bg-opacity-75' style='display: sticky; top: 0;'>
+        <div class='w-25 border h-100 p-2 rounded bg-success bg-opacity-75 mb-2' style='display: sticky; top: 0;'>
             <form method="post" asp-controller="Home" asp-action="Busqueda" class='text-white'>
-            @*<form class='text-white'>*@
                 <h2>Filtros</h2>
                 <small class='w-75'>Puede filtrar por los diferentes campos</small>
 
                 <hr />
 
                 <div class='w-100'>
-                       <label asp-for="Codigo" class="form-label ">Codigo: </label>
-            <input asp-for="Codigo" class="form-control bg-whitegray" />
-            <span asp-validation-for="Codigo" class="text-danger"></span>
+                    <label asp-for="Codigo" class="form-label ">Codigo: </label>
+                    <input asp-for="Codigo" class="form-control bg-whitegray" />
+                    <span asp-validation-for="Codigo" class="text-danger"></span>
                 </div>
 
                 <div class='w-100'>
                      <label asp-for="TipoPropiedadId" class="form-label text-sm-left">Tipo Propiedad: </label>     
-            <select asp-for="TipoPropiedadId" asp-items="@(new SelectList(TiposPropiedad,"Id","Name"))" class="form-select">
-                            <option value="0">Seleccione una opcion</option>
-                        </select>
-            <span asp-validation-for="TipoPropiedadId" class="text-danger"></span>
+                     <select asp-for="TipoPropiedadId" asp-items="@(new SelectList(TiposPropiedad,"Id","Name"))" class="form-select">
+                        <option value="0">Seleccione una opcion</option>
+                     </select>
+                     <span asp-validation-for="TipoPropiedadId" class="text-danger"></span>
                 </div>
 
                 <hr />
 
                 <div class='w-100'>
                     <label asp-for="Codigo" class="form-label ">Precios: </label>
-            <input asp-for="PrecioMin" placeholder="Minimo" class="form-control bg-whitegray " />
-            <input asp-for="PrecioMax" placeholder="Maximo" class="form-control bg-whitegray " />
+                    <section class="w-100 d-flex flex-row ">
+                        <input asp-for="PrecioMin" placeholder="Minimo" class="form-control w-50 bg-whitegray " />
+                        <input asp-for="PrecioMax" placeholder="Maximo" class="form-control w-50 mx-2 bg-whitegray " />
+                    </section>
                 </div>
 
                 <div class='w-100'>
                     <label asp-for="CantBanos" class="form-label ">Cantidad baños: </label>
-            <input asp-for="CantBanos" class="form-control bg-whitegray " />
+                    <input asp-for="CantBanos" class="form-control bg-whitegray " />
                 </div>
 
                 <div class='w-100'>
                     <label asp-for="CantHabitaciones" class="form-label ">Cantidad Habitaciones: </label>
-            <input asp-for="CantHabitaciones" class="form-control bg-whitegray " />
+                    <input asp-for="CantHabitaciones" class="form-control bg-whitegray " />
                 </div>
 
                 <hr />
