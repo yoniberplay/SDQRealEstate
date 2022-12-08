@@ -4,25 +4,69 @@
     ViewData["Title"] = "Agentes";
 }
 
-<div class="cards-wrapper">
+<div 
+    class='bg- d-flex flex-row justify-content-center align-items-center' 
+    style="width: 100%; min-height: 83.9vh; height: auto"
+>
+    
+    <section class="w-75 d-flex flex-column justify-content-center align-items-center gap-2 p-2">
+                    
+        <!-- This is title  -->
+        <div class="w-75">
+            <h2 class="text-left">Agentes</h2>
+            <small class='w-75 text-muted'>Aquí puede encontrar los agentes de nuestros servicios.</small>
+            <hr />
+        </div>
 
-     <div class="row row-cols-4 m-2">
+        <!-- this is the card -->
+        <div class="d-flex flex-row flex-wrap w-75 justify-content-between">
         
-            @foreach(var item in Model)
-    {
-        <a asp-controller="Home" asp-action="PropiedadesAgente" asp-route-id="@item.Id" class="text-reset text-decoration-none ">
-        <div class="card zoom " style="width: 18rem; background-color: #C7DBD2 ">
-    <h4 class="card-title mt-2" align="center"> <strong>@item.FirstName @item.LastName</strong> </h4>
-  <img class="card-img-top " src="@item.Foto" alt="Card image cap">
-  <div class="card-body">
-   @* <p class="card-text"> @item.Email
-        <br/>
-    <strong>Tipos: </strong> @item.tipos.Name @item.SecondaryType
-     <br/>
-    <strong>Region: </strong>  @item.regions.Name*@
-  </div>
-</div>
-</a>
-    }
-    </div>
+            <section class="w-100">
+                <div class="w-100 d-flex flex-row justify-content-between align-items-center flex-wrap">
+                    @foreach(var item in Model)
+                    {
+                        <a asp-controller="Home" asp-action="PropiedadesAgente" asp-route-id="@item.Id" class="text-reset text-decoration-none ">
+                            <div class="card zoom" style="width: 18rem;">
+
+                                <section class="w-100 bg-success bg-opacity-75 p-3">
+                                    <div class="w-25 mx-auto rounded-circle overflow-hidden bg-success bg-opacity-75">
+                                        <img class="card-img-top w-100" src="@item.Foto" alt="Card image cap">
+                                    </div>
+                                </section>
+                                
+                                <section class="text-left mx-auto p-2">
+                                    <h6 class="card-title mt-2" align="center"> @item.FirstName @item.LastName </h6>
+
+                                    <!-- Stars -->
+                                    <div class="w-100 d-flex flex-row justify-content-center align-items-center gap-2 text-success">
+
+                                        <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                        <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                        <svg viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" width="15" height="15"><path d="M7.5 12.04l-4.326 2.275L4 9.497.5 6.086l4.837-.703L7.5 1l2.163 4.383 4.837.703L11 9.497l.826 4.818L7.5 12.041z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+
+                                </section>
+
+                                <!-- <div class="card-body">
+                                   @* <p class="card-text"> @item.Email
+                                        <br/>
+                                    <strong>Tipos: </strong> @item.tipos.Name @item.SecondaryType
+                                     <br/>
+                                    <strong>Region: </strong>  @item.regions.Name*@
+                                </div>-->
+                            </div>
+                        </a>
+                    }
+                </div>
+            </section>
+
+        </div>
+
+               
+    </section>
+
+    <section class="w-25 h-100  p-0 rounded overflow-hidden mx-4">
+        <img src='/Images/Predeterminated/agents.png' alt='main login image' class='w-100' />
+    </section>
+
 </div>

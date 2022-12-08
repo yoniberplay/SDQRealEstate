@@ -4,4 +4,22 @@
 @{
 }
 
-<h1 class="text-danger">No tiene permiso para usar la web app</h1>
+<div 
+    class='bg- d-flex flex-row justify-content-center align-items-center' 
+    style="width: 100%; min-height: 83.9vh; height: auto"
+>
+    
+    <!-- Image of Error -->
+    <section class="w-75 h-100  p-0 rounded overflow-hidden mx-4">
+        <img src='/Images/Predeterminated/error.png' alt='main login image' class='w-100' />
+    </section>
+
+    <!-- Section -->
+    <section class="w-50 mx-auto d-flex flex-column justify-content-center align-items-center gap-2 p-2">
+        <h2 class="text-right">¡Oops!</h2>
+        <small class='w-75 text-muted text-right'>Si está viendo esto es porque no tiene permiso para usar la Aplicación Web.</small>
+
+        <a class="btn btn-light w-75 my-2" asp-controller="Home" asp-action="Index">Volver</a>
+    </section>
+
+</div>
