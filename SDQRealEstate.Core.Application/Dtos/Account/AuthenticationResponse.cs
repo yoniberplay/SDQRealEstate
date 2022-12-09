@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,12 @@ namespace SDQRealEstate.Core.Application.Dtos.Account
         public bool IsVerified { get; set; }
         public bool HasError { get; set; }
         public String Error { get; set; }
+
+        public string JWToken { get; set; }
+
+        [JsonIgnore]
+        public string RefreshToken { get; set; }
+
 
     }
 }

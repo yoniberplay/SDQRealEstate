@@ -10,6 +10,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SDQRealEstate.Core.Application.Helpers;
+using SDQRealEstate.Core.Domain.Settings;
+using Microsoft.Extensions.Options;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using Microsoft.IdentityModel.Tokens;
 
 namespace SDQRealEstate.Infrastructure.Identity.Services
 {
@@ -18,13 +24,73 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailService _emailService;
+        private readonly JWTSettings _jwtSettings;
 
-        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailService emailService)
+        public AccountService(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager,
+            IEmailService emailService,
+            IOptions<JWTSettings> jwtSettings)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailService = emailService;
+            _jwtSettings = jwtSettings.Value;
         }
+        #region Privates
+        private async Task<JwtSecurityToken> GenerateJWToken(ApplicationUser user)
+        {
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+
+            var roleClaims = new List<Claim>();
+
+            foreach (var role in roles)
+            {
+                roleClaims.Add(new Claim("roles", role));
+            }
+
+            var claims = new[]
+            {
+                new Claim(JwtRegisteredClaimNames.Sub,user.UserName)
+                ,new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
+                ,new Claim(JwtRegisteredClaimNames.Email,user.Email)
+                ,new Claim("uid",user.Id)
+            }
+            .Union(userClaims)
+            .Union(roleClaims);
+
+            var symetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Key));
+            var signingCredentials = new SigningCredentials(symetricSecurityKey, SecurityAlgorithms.HmacSha256);
+
+            var jwtSecurityToken = new JwtSecurityToken(
+                issuer: _jwtSettings.Issuer,
+                audience: _jwtSettings.Audience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DurationInMinutes),
+                signingCredentials: signingCredentials);
+
+            return jwtSecurityToken;
+        }
+
+        private RefreshToken GenerateRefreshToken()
+        {
+            return new RefreshToken
+            {
+                Token = RandomTokenString(),
+                Expires = DateTime.UtcNow.AddDays(7),
+                Created = DateTime.UtcNow
+            };
+        }
+
+        private string RandomTokenString()
+        {
+            using var rngCryptoServiceProvider = new RNGCryptoServiceProvider();
+            var ramdomBytes = new byte[40];
+            rngCryptoServiceProvider.GetBytes(ramdomBytes);
+
+            return BitConverter.ToString(ramdomBytes).Replace("-", "");
+        }
+
+        #endregion
 
         public async Task SignOutAsync()
         {
@@ -56,6 +122,8 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                 return response;
             }
 
+            JwtSecurityToken jwtSecurityToken = await GenerateJWToken(user);
+
             response.Id = user.Id;
             response.Email = user.Email;
             response.UserName = user.UserName;
@@ -63,7 +131,12 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
             var rolesList = await _userManager.GetRolesAsync(user).ConfigureAwait(false);
 
             response.Roles = rolesList.ToList();
+            response.JWToken = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             response.IsVerified = user.EmailConfirmed;
+
+            var refreshToken = GenerateRefreshToken();
+            response.RefreshToken = refreshToken.Token;
+             
 
             return response;
         }
@@ -111,7 +184,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                 await _userManager.UpdateAsync(user);
                 if (request.Tipo.Equals("Cliente"))
                 {
-                    
+
                     await _userManager.AddToRoleAsync(user, Roles.Cliente.ToString());
                     var verificacion = await SendVerificationEmailUri(user, origin);
                     await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
@@ -121,15 +194,15 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                         Subject = "Confirm registration"
                     });
 
-                }else if(request.Tipo.Equals("Agente"))
-                { 
-                await _userManager.AddToRoleAsync(user, Roles.Agente.ToString());
-                await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
+                } else if (request.Tipo.Equals("Agente"))
                 {
-                    To = user.Email,
-                    Body = $"Gracias por unirte a nuestra familia, tu cuenta sera revisada y activada por un admistrador en un plazo de 24 horas.",
-                    Subject = "Confirm registration"
-                });
+                    await _userManager.AddToRoleAsync(user, Roles.Agente.ToString());
+                    await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
+                    {
+                        To = user.Email,
+                        Body = $"Gracias por unirte a nuestra familia, tu cuenta sera revisada y activada por un admistrador en un plazo de 24 horas.",
+                        Subject = "Confirm registration"
+                    });
                 }
                 else if (request.Tipo.Equals("Desarrollador"))
                 {
@@ -156,7 +229,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
 
             return response;
         }
-        
+
         public async Task<string> ConfirmAccountAsync(string userId, string token)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -261,6 +334,6 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
 
 
 
-        
+
     }
 }
