@@ -7,52 +7,67 @@
 
 }
 
-<div class="w-75 d-flex justify-content-end">
-        <div class="">
-            <a asp-controller="Admin" asp-action="CreateDesarrollador"  class="btn btn-primary"><b> <i class="fa fa-plus" style="font-size:20px"></i>Crear Desarrollador</b></a>
-        </div>
-    </div>
-<div class="container d-flex align-items-center justify-content-center ">
-<div class="w-75 ">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">NOMBRE</th>
-      <th scope="col">APELLIDO</th>
-      <th scope="col">USUARIO</th>
-      <th scope="col">TELEFONO</th>
-      <th scope="col">CORREO</th>
-      <th scope="col">ESTATUS</th>
-      <th scope="col">ACCION</th>
-    </tr>
-  </thead>
-  <tbody>
+<div 
+    class='d-flex flex-column justify-content-center align-items-center' 
+    style="width: 100%; min-height: 83.9vh; height: auto"
+>
 
-      @foreach (var item in UsersAgent)
-{
-     <tr>
-      <td>@item.FirstName</td>
-      <td>@item.LastName</td>
-      <td>@item.Username</td>
-      <td>@item.Phone</td>
-      <td>@item.Email </td>
-      <td>@(@item.EmailConfirmed? "ACTIVO" : "INACTIVO")</td>
-       @if (@item.Id != currentuser)
-                            {
-       <td>
-<a asp-controller="Admin" asp-action=@(item.EmailConfirmed? "DesactivarDesarrollador" : "ActivarDesarrollador") asp-route-id="@item.Id" class="btn w-100 @(@item.EmailConfirmed? "btn-warning" : "btn-success")"> @(@item.EmailConfirmed? "DESACTIVAR" : "ACTIVAR") </a>
-                            </td>
-                        }else
+    <section class="w-75 d-flex flex-row justify-content-between align-content-center mb-4 flex-wrap">
+        <h2>Mantenimiento Desarrollador</h2>
+         <a asp-controller="Admin" asp-action="CreateDesarrollador" class="btn btn-success"><b> <i class="fa fa-plus" style="font-size:20px"></i>Crear Desarrollador</b></a>
+
+         <div class="w-100">
+             <hr />
+         </div>
+    </section>
+
+    <section class="w-100 d-flex flex-row align-items-center justify-content-center" style="min-height: 65vh; height: auto">
+
+        <section class="w-100 rounded overflow-hidden mx-2 mt-2 d-flex justify-content-center align-items-center">
+            <img src='/Images/Predeterminated/changepassword.png' alt='main login image' style='width: 75%; height: 25rem; filter: brightness(90%); margin: 0 auto;' />
+        </section>
+
+        <div class="w-100 mx-5">
+            <table class="table table-hover">
+                  <thead>
+                        <tr>
+                            <th scope="col">NOMBRE</th>
+                            <th scope="col">APELLIDO</th>
+                            <th scope="col">USUARIO</th>
+                            <th scope="col">TELEFONO</th>
+                            <th scope="col">CORREO</th>
+                            <th scope="col">ESTATUS</th>
+                            <th scope="col">ACCION</th>
+                        </tr>
+                  </thead>
+                    <tbody>
+                        @foreach (var item in UsersAgent)
                         {
-                             <td>NINGUNA</td>
+                            <tr>
+                                <td>@item.FirstName</td>
+                                <td>@item.LastName</td>
+                                <td>@item.Username</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Email </td>
+                                <td>@(@item.EmailConfirmed? "ACTIVO" : "INACTIVO")</td>
+                                @if (@item.Id != currentuser)
+                                {
+                                    <td>
+                                        <a asp-controller="Admin" asp-action=@(item.EmailConfirmed? "DesactivarDesarrollador" : "ActivarDesarrollador") asp-route-id="@item.Id" class="btn w-100 @(@item.EmailConfirmed? "btn-warning" : "btn-success")"> @(@item.EmailConfirmed? "DESACTIVAR" : "ACTIVAR") </a>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>NINGUNA</td>
+                                }
+
+                               <td>
+                                   <a asp-controller="Admin" asp-action="UpdateDesarrollador" asp-route-id="@item.Id" class="btn w-100 btn-info"> EDITAR </a> </td>
+                               </tr>
                         }
-
-       <td><a asp-controller="Admin" asp-action="UpdateDesarrollador" asp-route-id="@item.Id" class="btn w-100 btn-info"> EDITAR </a> </td>
-                    </tr>
-}
-  </tbody>
-</table>
-</div>
-
+                    </tbody>
+            </table>
+        </div>
+    </section>
 </div>
 
