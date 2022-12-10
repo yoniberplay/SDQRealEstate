@@ -45,9 +45,12 @@ namespace SDQRealEstate.Infrastructure.Identity
 
             services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
 
-            services.AddAuthentication(o => {
+            //services.AddAuthentication();
+
+            services.AddAuthentication(o =>
+            {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(o =>
             {
                 o.RequireHttpsMetadata = false;
@@ -77,7 +80,7 @@ namespace SDQRealEstate.Infrastructure.Identity
                         c.HandleResponse();
                         c.Response.StatusCode = 401;
                         c.Response.ContentType = "application/json";
-                        var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "No tiene autorizacion." });
+                        var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "Acceso denegado" });
                         return c.Response.WriteAsync(result);
                     },
                     OnForbidden = c =>
@@ -86,7 +89,8 @@ namespace SDQRealEstate.Infrastructure.Identity
                         c.Response.ContentType = "application/json";
                         var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "No tiene autorizacion para acceder a esta area" });
                         return c.Response.WriteAsync(result);
-                    }
+                    },
+                    
                 };
             });
 

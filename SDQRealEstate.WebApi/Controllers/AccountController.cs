@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using SDQRealEstate.Core.Application.DTOs.Account;
+using SDQRealEstate.Core.Application.Enums;
 
 namespace SDQRealEstate.Presentation.WebApi.Controllers
 {
@@ -28,10 +29,17 @@ namespace SDQRealEstate.Presentation.WebApi.Controllers
             return Ok(user);
         }
 
-        [Authorize(Roles ="Admin,SuperAdmin")]
-        [HttpPost("Register")]
-        public async Task<IActionResult> RegisterAsync(RegisterRequest request)
+        //[Authorize(Roles ="Admin")]
+        [HttpPost("RegisterDeveloper")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> RegisterDeveloper(RegisterRequest request)
         {
+            if(request.Tipo != Roles.Desarrollador.ToString())
+            {
+                return BadRequest();
+            }
             try
             {
                 var origin = Request.Headers["origin"];
@@ -50,7 +58,40 @@ namespace SDQRealEstate.Presentation.WebApi.Controllers
             }
         }
 
-        [Authorize(Roles ="Admin,SuperAdmin")]
+
+
+        [Authorize(Roles ="Admin")]
+        [HttpPost("RegisterAdmin")]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> RegisterAdmin(RegisterRequest request)
+        {
+            if (request.Tipo != Roles.Admin.ToString())
+            {
+                return BadRequest();
+            }
+            try
+            {
+                var origin = Request.Headers["origin"];
+
+                var user = await _accountService.RegisterClientUserAsync(request, origin);
+                if (user == null)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError);
+                }
+
+                return Ok(user);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin,Desarrollador")]
         [HttpGet("confirm-email")]
         public async Task<IActionResult> confirmemail([FromQuery]String userID, [FromQuery] string token)
         {
@@ -70,7 +111,6 @@ namespace SDQRealEstate.Presentation.WebApi.Controllers
         {
             return Ok(await _accountService.ResetPasswordAsync(request));
         }
-
 
 
 

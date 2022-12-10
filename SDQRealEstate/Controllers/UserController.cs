@@ -48,6 +48,7 @@ namespace WebApp.SDQRealEstate.Controllers
                 var isAdmin = User != null ? userVm.Roles.Any(r => r == "Admin") : false;
                 var isClient = User != null ? userVm.Roles.Any(r => r == "Cliente") : false;
                 var isAgent = User != null ? userVm.Roles.Any(r => r == "Agente") : false;
+
                 String controlador = "";
                 if (isAdmin)
                 {

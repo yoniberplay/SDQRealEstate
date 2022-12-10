@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
 using SDQRealEstate.Core.Application.Interfaces.Services;
 using System.Reflection;
+using MediatR;
 
 namespace SDQRealEstate.Core.Application
 {
@@ -15,6 +16,7 @@ namespace SDQRealEstate.Core.Application
         {
             #region Services
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddTransient<IPropiedadService, PropiedadService>();
             services.AddTransient<IFotosService, FotosService>();
             services.AddTransient<IUserService, UserService>();

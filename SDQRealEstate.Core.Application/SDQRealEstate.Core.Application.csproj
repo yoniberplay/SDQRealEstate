@@ -26,4 +26,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Propiedades\" />
+    <Folder Include="Features\Propiedades\Commands\CreatePropiedad\" />
+    <Folder Include="Features\Propiedades\Commands\DeletePropiedadById\" />
+    <Folder Include="Features\Propiedades\Commands\UpdatePropiedad\" />
+    <Folder Include="Features\Propiedades\Queries\GetAllProducts\" />
+    <Folder Include="Features\Propiedades\Queries\GetProductById\" />
+  </ItemGroup>
+
 </Project>

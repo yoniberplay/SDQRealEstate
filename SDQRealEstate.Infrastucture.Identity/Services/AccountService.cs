@@ -178,13 +178,14 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
             var result = await _userManager.CreateAsync(user, request.Password);
             if (result.Succeeded)
             {
+                if(request.File != null)
+                {
+                    var foto = AdmFiles.UploadFile(request.File, user.Id, "Users");
+                    user.Foto = foto;
+                }else user.Foto = "NINGUNA";
 
-                var foto = AdmFiles.UploadFile(request.File, user.Id, "Users");
-                user.Foto = foto;
-                await _userManager.UpdateAsync(user);
                 if (request.Tipo.Equals("Cliente"))
                 {
-
                     await _userManager.AddToRoleAsync(user, Roles.Cliente.ToString());
                     var verificacion = await SendVerificationEmailUri(user, origin);
                     await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
@@ -206,6 +207,7 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                 }
                 else if (request.Tipo.Equals("Desarrollador"))
                 {
+                    user.EmailConfirmed = true;
                     await _userManager.AddToRoleAsync(user, Roles.Desarrollador.ToString());
                     await _emailService.SendAsync(new Core.Application.Dtos.Email.EmailRequest()
                     {
@@ -216,8 +218,11 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
                 }
                 else
                 {
+                    user.EmailConfirmed = true;
                     await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
                 }
+
+                await _userManager.UpdateAsync(user);
 
             }
             else
