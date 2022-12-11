@@ -34,7 +34,7 @@ namespace SDQRealEstate.Presentation.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RegisterDeveloper(RegisterRequest request)
+        public async Task<IActionResult> RegisterDeveloper([FromQuery] RegisterRequest request)
         {
             if(request.Tipo != Roles.Desarrollador.ToString())
             {
@@ -66,7 +66,7 @@ namespace SDQRealEstate.Presentation.WebApi.Controllers
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> RegisterAdmin(RegisterRequest request)
+        public async Task<IActionResult> RegisterAdmin([FromQuery]RegisterRequest request)
         {
             if (request.Tipo != Roles.Admin.ToString())
             {

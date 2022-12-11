@@ -27,6 +27,23 @@ namespace SDQRealEstate.Infrastructure.Identity.Services
             _emailService = emailService;
         }
 
+        public async Task<int> ChangeStatusUser(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            if(user == null) throw new Exception("Agent not found");
+
+            if (user.EmailConfirmed)
+            {
+                user.EmailConfirmed = false;
+                await _userManager.UpdateAsync(user);
+                return 0;
+            }
+
+            user.EmailConfirmed = true;
+            await _userManager.UpdateAsync(user);
+            return 1;
+        }
+
         public async Task<List<UserViewModel>> GetbyRolList(String rol)
         {
             List<UserViewModel> agentList = new List<UserViewModel>();

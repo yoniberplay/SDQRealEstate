@@ -7,5 +7,6 @@ namespace SDQRealEstate.Core.Application.Interfaces.Services
     {
 
         Task<List<UserViewModel>> GetbyRolList(String rol);
+        Task<int> ChangeStatusUser(String id);
     }
 }

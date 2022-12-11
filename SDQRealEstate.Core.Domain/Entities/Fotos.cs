@@ -9,6 +9,7 @@ namespace SDQRealEstate.Core.Domain.Entities
 {
     public class Fotos : AuditableBaseEntity
     {
+
         public int PropiedadId { get; set; }
         public string? ImageUrl { get; set; }
 
