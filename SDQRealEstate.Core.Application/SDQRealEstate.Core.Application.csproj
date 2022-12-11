@@ -27,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\MantTipoPropiedades\Queries\GetPropiedadtCode\" />
     <Folder Include="Features\Propiedades\Commands\CreatePropiedad\" />
     <Folder Include="Features\Propiedades\Commands\DeletePropiedadById\" />
     <Folder Include="Features\Propiedades\Commands\UpdatePropiedad\" />

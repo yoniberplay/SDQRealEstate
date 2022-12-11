@@ -18,7 +18,6 @@ namespace SDQRealEstate.Core.Application.Dtos.TipoPropiedades
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public ICollection<PropiedadResponse>? propiedad { get; set; }
 
     }
 }

@@ -20,6 +20,12 @@ using SDQRealEstate.Core.Application.Dtos.Mejora;
 using SDQRealEstate.Core.Application.Features.Propiedades.Queries.GetPropiedadtByCode;
 using SDQRealEstate.Core.Application.Dtos.Agentes;
 using SDQRealEstate.Core.Application.Features.Agentes.Queries.GetAgentProperty;
+using SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Commands.CreateTipoPropiedad;
+using SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Commands.UpdateTipoPropiedad;
+using SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Commands.CreateTipoVenta;
+using SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Commands.UpdateTipoVenta;
+using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Commands.CreateMejora;
+using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Commands.UpdateMejora;
 
 namespace SDQRealEstate.Core.Application.Mappings
 {
@@ -121,6 +127,7 @@ namespace SDQRealEstate.Core.Application.Mappings
             #endregion
 
             #region mapeo de TipoPropiedades
+
             CreateMap<TipoPropiedades, SaveTipoPropiedadViewModel>()
                 .ReverseMap()
                 .ForMember(dest => dest.Created, opt => opt.Ignore())
@@ -140,7 +147,9 @@ namespace SDQRealEstate.Core.Application.Mappings
                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
             CreateMap<TipoPropiedades, TipoPropiedadesReponse>()
-               .ReverseMap();
+               .ReverseMap()
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore());
+
             #endregion
 
             #region mapeo de TipoVenta
@@ -164,6 +173,7 @@ namespace SDQRealEstate.Core.Application.Mappings
             #endregion
 
             #region CQRS
+
             CreateMap<GetPropiedadtByCodeQuery, GetPropiedadtByCodeQuery>()
               .ReverseMap();
 
@@ -178,6 +188,118 @@ namespace SDQRealEstate.Core.Application.Mappings
              .ForMember(dest => dest.Tipo, opt => opt.Ignore())
              .ForMember(dest => dest.Foto, opt => opt.Ignore())
              .ReverseMap();
+
+            #region TipoPropiedades
+
+            CreateMap<TipoPropiedades, CreateTipoPropiedadCommand>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<UpdateTipoPropiedadCommand, TipoPropiedadUpdateResponse>()
+            .ReverseMap();
+
+            CreateMap<UpdateTipoPropiedadCommand, TipoPropiedades>()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore())
+           .ReverseMap();
+
+            CreateMap<TipoPropiedades, TipoPropiedadUpdateResponse>()
+            .ReverseMap()
+            .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            #endregion
+
+
+            #region TipoVenta
+            CreateMap<TipoVenta, CreateTipoVentaCommand>()
+           .ReverseMap()
+           .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<TipoVenta, TipoVentaUpdateResponse>()
+           .ReverseMap()
+           .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<TipoVentaUpdateResponse, CreateTipoVentaCommand>()
+            .ReverseMap();
+
+            CreateMap<UpdateTipoVentaCommand, TipoVenta>()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore())
+           .ReverseMap();
+
+            CreateMap<TipoVentaResponse, TipoVenta>()
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore())
+          .ReverseMap();
+
+            #endregion
+
+            #region MEJORA
+            CreateMap<Mejora, CreateMejoraCommand>()
+           .ReverseMap()
+           .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<Mejora, MejoraUpdateResponse>()
+           .ReverseMap()
+           .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<MejoraUpdateResponse, CreateMejoraCommand>()
+            .ReverseMap();
+
+            CreateMap<UpdateMejoraaCommand, Mejora>()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore())
+           .ReverseMap();
+
+            CreateMap<MejoraResponse, Mejora>()
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.propiedad, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore())
+          .ReverseMap();
+
+            #endregion
+
+
+
+
             #endregion
 
 

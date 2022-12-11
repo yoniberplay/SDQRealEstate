@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SDQRealEstate.Presentation.WebApi.Controllers;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using SDQRealEstate.Core.Application.ViewModels.Propiedad;
 using SDQRealEstate.Core.Application.Dtos.Agentes;
 using SDQRealEstate.Core.Application.Features.Agentes.Queries.GetList;
 using SDQRealEstate.Core.Application.Features.Agentes.Queries.GetById;
@@ -60,7 +55,7 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PropiedadResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> Get(GetAgentPropertyParameters filter)
+        public async Task<IActionResult> Get([FromQuery]GetAgentPropertyParameters filter)
         {
 
             try
