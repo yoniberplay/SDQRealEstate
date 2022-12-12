@@ -84,7 +84,7 @@ namespace WebApp.SDQRealEstate.Controllers
 
             if (fp.Codigo != 0)
             {
-                temp = temp.Where(x => x.Id == fp.Codigo).ToList();
+                temp = temp.Where(x => x.Codigo == fp.Codigo).ToList();
             }
             if (fp.TipoPropiedadId != 0)
             {

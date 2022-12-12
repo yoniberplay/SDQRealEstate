@@ -12,6 +12,7 @@ namespace SDQRealEstate.Core.Application.Dtos.Propiedad
 {
     public class PropiedadResponse
     {
+        public int Codigo { get; set; }
         public int Id { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime? Created { get; set; }

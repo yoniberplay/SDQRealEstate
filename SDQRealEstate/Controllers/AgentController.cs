@@ -77,7 +77,23 @@ namespace WebApp.SDQRealEstate.Controllers
             }
 
             sv.UserId = _userLogged.Id;
-            sv.ImgUrl = "None";
+            sv.ImgUrl = "N/A";
+
+            bool tempcode = true;
+            int CodigoGerado=0;
+
+            while (tempcode)
+            {
+                CodigoGerado = GenerateCode();
+
+                var exist = await _ipropiedadService.GetByCode(CodigoGerado);
+
+                if (exist == null) tempcode=false;
+            }
+
+            sv.Codigo = CodigoGerado;
+
+
             var proptemp = await _ipropiedadService.Add(sv);
 
             if (proptemp.Id != 0 && proptemp != null)
@@ -111,6 +127,13 @@ namespace WebApp.SDQRealEstate.Controllers
             }
 
             return RedirectToRoute(new { controller = "Agent", action = "MantenimientoPropiedades" });
+        }
+
+        private int GenerateCode()
+        {
+            Random generator = new Random();
+            int r = generator.Next(0, 1000000);
+            return r;
         }
 
         [HttpPost]

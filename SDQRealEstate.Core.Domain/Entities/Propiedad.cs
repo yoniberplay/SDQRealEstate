@@ -13,6 +13,8 @@ namespace SDQRealEstate.Core.Domain.Entities
         public String? UserId { get; set; }
         public int TipoPropiedadId { get; set; }
         public int TipoVentaId { get; set; }
+
+        public int Codigo { get; set; }
         public int MejorasId { get; set; }
         public String? ImgUrl { get; set; }
 

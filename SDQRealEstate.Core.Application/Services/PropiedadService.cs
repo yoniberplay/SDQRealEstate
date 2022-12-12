@@ -61,6 +61,13 @@ namespace SDQRealEstate.Core.Application.Services
             return _mapper.Map<List<PropiedadViewModel>>(userList);
 
         }
+
+        public async Task<PropiedadViewModel> GetByCode(int code)
+        {
+            var temp = await GetAllViewModel();
+            
+            return temp.Where(x => x.Codigo == code).ToList().FirstOrDefault();
+        }
     }
        
     }

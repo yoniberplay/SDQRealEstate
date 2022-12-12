@@ -14,6 +14,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
     {
         public int Id { get; set; }
         public String? UserId { get; set; }
+        public int Codigo { get; set; }
         public String? TipoPropiedad { get; set; }
         public String? TipoVenta { get; set; }
         //public String? Mejoras { get; set; }

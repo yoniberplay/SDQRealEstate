@@ -11,6 +11,7 @@ namespace SDQRealEstate.Core.Application.ViewModels.Propiedad
     public class SavePropiedadViewModel 
     {
         public int Id { get; set; }
+        public int Codigo { get; set; }
 
         [Required(ErrorMessage = "Debe colocar el Tipo de Propiedad")]
         [DataType(DataType.Text)]

@@ -118,6 +118,10 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
                 .IsRequired();
 
             modelBuilder.Entity<Propiedad>().
+                Property(p => p.Codigo)
+                .IsRequired();
+
+            modelBuilder.Entity<Propiedad>().
                Property(p => p.Metros)
                .IsRequired();
 
