@@ -9,19 +9,26 @@ using SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Queries.GetT
 using SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Commands.CreateTipoPropiedad;
 using SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Commands.UpdateTipoPropiedad;
 using SDQRealEstate.Presentation.WebApi.Controllers;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net.Mime;
 
 namespace SDQRealEstate.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [SwaggerTag("Mantemiento de Tipo Ventas")]
     public class MantenimientoTipoVentasController : BaseApiController
     {
 
-
         [Authorize(Roles = "Admin")]
         [HttpPost("Create")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Crear una Tipo Venta",
+            Description = "Agregar un nuevo Tipo Venta"
+            )]
         public async Task<IActionResult> Post([FromQuery] CreateTipoVentaCommand command)
         {
             try
@@ -37,9 +44,14 @@ namespace SDQRealEstate.WebApi.Controllers.v1
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TipoVentaUpdateResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Actualizar Tipo Venta",
+            Description = "Actualiza un Tipo Venta con los datos requeridos."
+            )]
         public async Task<IActionResult> Put([FromQuery] UpdateTipoVentaCommand command)
         {
             try
@@ -57,6 +69,10 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TipoVentaResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Listar Tipo de Venta",
+            Description = "Lista todos los Tipo de Ventas."
+            )]
         public async Task<IActionResult> Get()
         {
             try
@@ -74,6 +90,10 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(TipoVentaResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Obtener Tipo de Venta",
+            Description = "Obtiene el Tipo de Venta con el Id que ha introducido."
+            )]
         public async Task<IActionResult> Get(int id)
         {
             try
@@ -91,6 +111,10 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Eliminar Tipo de Venta",
+            Description = "Eliman el Tipo de Venta con el Id que ha introducido."
+            )]
         public async Task<IActionResult> Delete(int id)
         {
             try

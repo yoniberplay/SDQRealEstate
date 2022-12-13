@@ -26,6 +26,8 @@ using SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Commands.Cre
 using SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Commands.UpdateTipoVenta;
 using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Commands.CreateMejora;
 using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Commands.UpdateMejora;
+using SDQRealEstate.Core.Application.ViewModels.Favorita;
+using StockApp.Core.Application.Features.Products.Queries.GetPropiedadtByCode;
 
 namespace SDQRealEstate.Core.Application.Mappings
 {
@@ -63,7 +65,6 @@ namespace SDQRealEstate.Core.Application.Mappings
                 .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
 
             CreateMap<Propiedad, SavePropiedadViewModel>()
-                //.ForMember(dest => dest.Id, opt => opt.Ignore())
                 .ForMember(dest => dest.File, opt => opt.Ignore())
                 .ForMember(dest => dest.File2, opt => opt.Ignore())
                 .ForMember(dest => dest.File3, opt => opt.Ignore())
@@ -172,9 +173,28 @@ namespace SDQRealEstate.Core.Application.Mappings
                .ReverseMap();
             #endregion
 
+            #region mapeo de Favorita
+            CreateMap<Favorita, FavoritaViewModel>()
+                .ReverseMap()
+                .ForMember(dest => dest.Created, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+                .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<Favorita, SaveFavoritaViewModel>()
+               .ReverseMap()
+               .ForMember(dest => dest.Created, opt => opt.Ignore())
+               .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModified, opt => opt.Ignore())
+               .ForMember(dest => dest.LastModifiedBy, opt => opt.Ignore());
+
+            CreateMap<Mejora, MejoraResponse>()
+               .ReverseMap();
+            #endregion
+
             #region CQRS
 
-            CreateMap<GetPropiedadtByCodeQuery, GetPropiedadtByCodeQuery>()
+            CreateMap<GetPropiedadtByCodeQuery, GetPropiedadtByCodeParameters>()
               .ReverseMap();
 
             CreateMap<GetAgentPropertyParameters, GetAgentPropertyQuery>()
@@ -188,6 +208,9 @@ namespace SDQRealEstate.Core.Application.Mappings
              .ForMember(dest => dest.Tipo, opt => opt.Ignore())
              .ForMember(dest => dest.Foto, opt => opt.Ignore())
              .ReverseMap();
+
+            //CreateMap<GetPropiedadtByCodeQuery, GetPropiedadtByCodeParameters>()
+            // .ReverseMap();
 
             #region TipoPropiedades
 

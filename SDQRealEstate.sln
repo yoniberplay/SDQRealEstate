@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDQRealEstate.Infrastructur
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{4FCCF9E7-69D8-4FF1-BBE0-1C42C8EEB81D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDQRealEstate.WebApi", "SDQRealEstate.WebApi\SDQRealEstate.WebApi.csproj", "{3B9EDE70-5075-452C-BB0A-98D1B6852420}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SDQRealEstate.WebApi", "SDQRealEstate.WebApi\SDQRealEstate.WebApi.csproj", "{3B9EDE70-5075-452C-BB0A-98D1B6852420}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

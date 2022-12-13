@@ -12,6 +12,7 @@ using SDQRealEstate.Core.Application.ViewModels.TipoPropiedad;
 using AutoMapper;
 using SDQRealEstate.Core.Application.ViewModels.TipoVenta;
 using SDQRealEstate.Core.Application.ViewModels.Mejoras;
+using SDQRealEstate.Core.Application.Enums;
 
 namespace WebApp.SDQRealEstate.Controllers  
 {
@@ -46,8 +47,23 @@ namespace WebApp.SDQRealEstate.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+            var cantp = await _ipropiedadService.GetAllViewModel();
+            ViewBag.CantPropiedades = cantp.ToList().Count;
+
+            var cantactiveagente = await _userManager.GetUsersInRoleAsync(Roles.Agente.ToString());
+            ViewBag.CantAgentesActivos = cantactiveagente.Where(e => e.EmailConfirmed == true).ToList().Count;
+            ViewBag.CantAgentesInactivos = cantactiveagente.Where(e => e.EmailConfirmed == false).ToList().Count;
+
+            var CantClientes = await _userManager.GetUsersInRoleAsync(Roles.Cliente.ToString());
+            ViewBag.CantClientesActivos = CantClientes.Where(e => e.EmailConfirmed == true).ToList().Count;
+            ViewBag.CantClientesInactivos = CantClientes.Where(e => e.EmailConfirmed == false).ToList().Count;
+
+            var CantDesarrolladores = await _userManager.GetUsersInRoleAsync(Roles.Desarrollador.ToString());
+            ViewBag.CantDesarrolladoresActivos = CantDesarrolladores.Where(e => e.EmailConfirmed == true).ToList().Count;
+            ViewBag.CantDesarrolladoresInactivos = CantDesarrolladores.Where(e => e.EmailConfirmed == false).ToList().Count;
+
             return View();
         }
 

@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using SDQRealEstate.Infrastucture.Shared.Services;
 using WebApp.SDQRealEstate.Middlewares;
 using SDQRealEstate.Middlewares;
+using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,7 +35,12 @@ builder.Services.AddHealthChecks();
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(o=> {
+    o.Filters.Add(new ProducesAttribute("application/json"));   
+    }).ConfigureApiBehaviorOptions(o=> {
+        o.SuppressInferBindingSourcesForParameters = true;
+        o.SuppressMapClientErrors = true;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

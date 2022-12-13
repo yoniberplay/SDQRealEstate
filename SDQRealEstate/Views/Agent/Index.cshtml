@@ -8,7 +8,7 @@
     class='d-flex flex-column justify-content-center align-items-center' 
     style="width: 100%; min-height: 83.9vh; height: auto"
 >
-
+@*
     <section class="w-75 d-flex flex-row justify-content-between align-content-center mb-4 flex-wrap">
         <h2>Propiedades</h2>
          <a asp-controller="Agent" asp-action="CreatePropiedad" class="btn btn-primary"><b> <i class="fa fa-plus" style="font-size:20px"></i> Crear Propiedad </b></a>
@@ -16,7 +16,7 @@
          <div class="w-100 mx-auto">
              <hr />
          </div>
-    </section>
+    </section>*@
 
     <section class="w-100 d-flex flex-row align-items-center justify-content-center" style="min-height: 65vh; height: auto">
 
@@ -39,8 +39,10 @@
                                 <img class="bd-placeholder-img card-img-top img-product-size" src="@item.ImgUrl " />
 
                                 <div class="card-body">
-                                    <h4 class="card-title">@item.TipoPropiedad - @item.TipoVenta</h4>
+                                    <h4 class="card-title">@item.tipoPropiedades.Name - @item.tipoVenta.Name</h4>
                                     <p class="card-text">@item.Descripcion</p>
+                                     <small class="fw-bold fs-6">Codigo</small>
+                                 <p class="card-text">@item.Codigo</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                
                                         <small class="fw-bold fs-6">$@item.Precio</small>

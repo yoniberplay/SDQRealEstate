@@ -3,8 +3,10 @@ using MediatR;
 using SDQRealEstate.Core.Application.Dtos.Agentes;
 using SDQRealEstate.Core.Application.Dtos.Propiedad;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,8 @@ namespace SDQRealEstate.Core.Application.Features.Agentes.Queries.GetAgentProper
 {
     public class GetAgentPropertyQuery : IRequest<IList<PropiedadResponse>>
     {
+        [SwaggerParameter(Description = "Debe colocar el id del agente")]
+        [Required]
         public String Id { get; set; }
     }
     public class GetAgentPropertyQueryHandler : IRequestHandler<GetAgentPropertyQuery, IList<PropiedadResponse>>

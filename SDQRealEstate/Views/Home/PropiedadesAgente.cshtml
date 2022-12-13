@@ -59,6 +59,7 @@
 
                 <!-- iterator -->
                 @foreach(var item in list){
+                    <a asp-controller="Home" asp-action="DetallePropiedad" asp-route-id="@item.Id" class="text-reset text-decoration-none">
                     <section class="card mt-2" style="width: 18rem;">
                         <img class="card-img-top" src="@item.ImgUrl" alt="Card image cap">
                         <div class="card-body">
@@ -94,6 +95,7 @@
                             </section>
                         </div>
                     </section>
+                     </a>
                 }
 
             </section>

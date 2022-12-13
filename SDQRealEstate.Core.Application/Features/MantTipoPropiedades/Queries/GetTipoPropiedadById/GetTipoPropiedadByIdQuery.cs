@@ -2,6 +2,7 @@
 using MediatR;
 using SDQRealEstate.Core.Application.Dtos.TipoPropiedades;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Queries.Ge
 {
     public class GetTipoPropiedadByIdQuery : IRequest<TipoPropiedadesReponse>
     {
+        [SwaggerParameter(Description = "El id del tipo de propiedad que se desea seleccionar")]
         public int Id { get; set; }
     }
 

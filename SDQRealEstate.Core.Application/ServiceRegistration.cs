@@ -23,6 +23,7 @@ namespace SDQRealEstate.Core.Application
             services.AddTransient<IMejoraService, MejoraService>();
             services.AddTransient<ITipoPropiedadService, TipoPropiedadService>();
             services.AddTransient<ITipoVentaService, TipoVentaService>();
+            services.AddTransient<IFavoritaService, FavoritaService>();
 
             #endregion
         }

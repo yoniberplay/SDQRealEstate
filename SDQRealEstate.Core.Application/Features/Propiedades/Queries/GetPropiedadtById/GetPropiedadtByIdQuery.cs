@@ -6,6 +6,7 @@ using SDQRealEstate.Core.Application.Dtos.Propiedad;
 using SDQRealEstate.Core.Application.Helpers;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
 using SDQRealEstate.Core.Application.ViewModels.Propiedad;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace SDQRealEstate.Core.Application.Features.Propiedades.Queries.GetPropied
 {
     public class GetPropiedadtByIdQuery : IRequest<PropiedadResponse>
     {
+        [SwaggerParameter(Description = "El id de la propiedad que se desea seleccionar")]
         public int Id { get; set; }
     }
 

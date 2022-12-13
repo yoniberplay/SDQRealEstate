@@ -61,7 +61,8 @@ namespace WebApp.SDQRealEstate.Controllers
         public async Task<IActionResult> AgentesAsync()
         {
             var temp = await _userManager.GetUsersInRoleAsync("Agente");
-            return View(temp.ToList());
+            ViewBag.ListaAgentes = temp.OrderBy(x => x.FirstName).Where(x => x.EmailConfirmed == true).ToList();
+            return View(new FilterByNameViewModel());
         }
 
         public async Task<IActionResult> PropiedadesAgente(String id)
@@ -72,6 +73,21 @@ namespace WebApp.SDQRealEstate.Controllers
             ViewBag.agente = usertemp;
             return View();
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BusquedaByName(FilterByNameViewModel fp)
+        {
+            var temp = await _userManager.GetUsersInRoleAsync("Agente");
+            if (!ModelState.IsValid)
+            {
+                ViewBag.ListaAgentes = temp.OrderBy(x => x.FirstName).Where(x => x.EmailConfirmed == true).ToList();
+                return View("Agentes", fp);
+            }
+            ViewBag.ListaAgentes = temp.Where(L => string.Equals(L.FirstName, fp.Name, StringComparison.OrdinalIgnoreCase))
+                .Where(x => x.EmailConfirmed == true).ToList();
+
+            return View("Agentes", fp);
         }
 
         [HttpPost]

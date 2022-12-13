@@ -20,6 +20,8 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
         public DbSet<TipoPropiedades> TipoPropiedades { get; set; }
         public DbSet<TipoVenta> TipoVenta { get; set; }
 
+        public DbSet<Favorita> Favorita { get; set; }
+
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
@@ -62,11 +64,17 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             modelBuilder.Entity<TipoVenta>()
                 .ToTable("TipoVenta");
 
+            modelBuilder.Entity<Favorita>()
+                .ToTable("Favorita");
+
             #endregion
 
             #region "primary keys"
             modelBuilder.Entity<Propiedad>()
                 .HasKey(p => p.Id);
+
+            modelBuilder.Entity<Favorita>()
+               .HasKey(p => p.Id);
 
             modelBuilder.Entity<Fotos>()
                 .HasKey(c => c.Id);
@@ -106,6 +114,12 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
             .WithOne(P => P.Mejoras)
             .HasForeignKey(p => p.MejorasId)
             .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Propiedad>()
+           .HasMany<Favorita>(f => f.favorita)
+           .WithOne(P => P.propiedad)
+           .HasForeignKey(p => p.IdPropiedad)
+           .OnDelete(DeleteBehavior.Cascade);
 
             #endregion
 
@@ -195,6 +209,17 @@ namespace SDQRealEstate.Infrastructure.Persistence.Contexts
 
             modelBuilder.Entity<Mejora>().
              Property(c => c.Description)
+             .IsRequired();
+
+            #endregion
+
+            #region Favorita
+            modelBuilder.Entity<Favorita>().
+              Property(c => c.IdUser)
+              .IsRequired();
+
+            modelBuilder.Entity<Favorita>().
+             Property(c => c.IdPropiedad)
              .IsRequired();
 
             #endregion

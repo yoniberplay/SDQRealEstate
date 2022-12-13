@@ -2,7 +2,13 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Controlador Admin</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+    <h3 class="display-4">Propiedades registradas en el sistema: @ViewBag.CantPropiedades </h3>
+    <hr />
+     <h3 class="display-4">Agentes activos: @ViewBag.CantAgentesActivos </h3>
+      <h3 class="display-4">Agentes inactivos: @ViewBag.CantAgentesInactivos </h3>
+      <hr />
+       <h3 class="display-4">Clientes activos: @ViewBag.CantClientesActivos </h3>
+        <h3 class="display-4">Clientes inactivos: @ViewBag.CantClientesInactivos </h3>
+         <hr />
+       <h3 class="display-4">Desarrolladores activos: @ViewBag.CantDesarrolladoresActivos </h3>
+        <h3 class="display-4">Desarrolladores inactivos: @ViewBag.CantDesarrolladoresInactivos </h3>

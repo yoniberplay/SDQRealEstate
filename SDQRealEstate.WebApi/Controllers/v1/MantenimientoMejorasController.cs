@@ -8,17 +8,25 @@ using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Commands.Upda
 using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Queries.GetListMejora;
 using SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Queries.GetMejoraById;
 using SDQRealEstate.Presentation.WebApi.Controllers;
+using Swashbuckle.AspNetCore.Annotations;
+using System.Net.Mime;
 
 namespace SDQRealEstate.WebApi.Controllers.v1
 {
     [ApiVersion("1.0")]
+    [SwaggerTag("Mantemiento de Mejoras")]
     public class MantenimientoMejorasController : BaseApiController
     {
         [Authorize(Roles = "Admin")]
         [HttpPost("Create")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Crear una mejora",
+            Description = "Agregar una nueva mejora"
+            )]
         public async Task<IActionResult> Post([FromQuery] CreateMejoraCommand command)
         {
             try
@@ -34,9 +42,14 @@ namespace SDQRealEstate.WebApi.Controllers.v1
 
         [Authorize(Roles = "Admin")]
         [HttpPut("Update")]
+        [Consumes(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MejoraUpdateResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Actualizar mejora",
+            Description = "Actualiza una mejora con los datos requeridos."
+            )]
         public async Task<IActionResult> Put([FromQuery] UpdateMejoraaCommand command)
         {
             try
@@ -54,6 +67,10 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MejoraResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Listar mejoras",
+            Description = "Lista todas las mejoras."
+            )]
         public async Task<IActionResult> Get()
         {
             try
@@ -71,6 +88,10 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(MejoraResponse))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Obtener mejora",
+            Description = "Obtiene la mejora con el Id que ha introducido."
+            )]
         public async Task<IActionResult> Get(int id)
         {
             try
@@ -88,6 +109,10 @@ namespace SDQRealEstate.WebApi.Controllers.v1
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [SwaggerOperation(
+            Summary = "Eliminar mejora",
+            Description = "Eliman la mejora con el Id que ha introducido."
+            )]
         public async Task<IActionResult> Delete(int id)
         {
             try

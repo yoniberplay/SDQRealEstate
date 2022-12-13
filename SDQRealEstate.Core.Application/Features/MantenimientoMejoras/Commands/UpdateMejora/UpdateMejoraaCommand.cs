@@ -3,6 +3,7 @@ using MediatR;
 using SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Commands.UpdateTipoPropiedad;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
 using SDQRealEstate.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Commands.
     public class UpdateMejoraaCommand : IRequest<MejoraUpdateResponse>
     {
         public int Id { get; set; }
+
+        [SwaggerParameter(Description = "El nombre de la mejora")]
         public string Name { get; set; }
+
+        [SwaggerParameter(Description = "La descripcion de la mejora")]
         public string Description { get; set; }
     }
 

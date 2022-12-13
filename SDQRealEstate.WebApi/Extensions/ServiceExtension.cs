@@ -30,7 +30,7 @@ namespace SDQRealEstate.Presentation.WebApi.Extensions
                         Url = new Uri("https://github.com/yoniberplay")
                     }
                 });
-
+                opt.EnableAnnotations();
                 opt.DescribeAllParametersInCamelCase();
                 opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

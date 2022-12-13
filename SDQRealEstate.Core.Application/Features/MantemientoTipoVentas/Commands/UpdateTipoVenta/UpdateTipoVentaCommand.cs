@@ -3,6 +3,7 @@ using MediatR;
 using SDQRealEstate.Core.Application.Features.MantTipoPropiedades.Commands.UpdateTipoPropiedad;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
 using SDQRealEstate.Core.Domain.Entities;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,11 @@ namespace SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Commands
     public class UpdateTipoVentaCommand : IRequest<TipoVentaUpdateResponse>
     {
         public int Id { get; set; }
+
+        [SwaggerParameter(Description = "El nombre del Tipo de Venta")]
         public string Name { get; set; }
+
+        [SwaggerParameter(Description = "La descripcion del Tipo de Venta")]
         public string Description { get; set; }
     }
 

@@ -3,6 +3,7 @@ using MediatR;
 using SDQRealEstate.Core.Application.Dtos.Mejora;
 using SDQRealEstate.Core.Application.Dtos.TipoVenta;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace SDQRealEstate.Core.Application.Features.MantenimientoMejoras.Queries.G
 {
     public class GetMejoraByIdQuery : IRequest<MejoraResponse>
     {
+        [SwaggerParameter(Description = "El id de la mejora que se desea seleccionar")]
         public int Id { get; set; }
     }
 

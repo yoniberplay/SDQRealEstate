@@ -38,6 +38,7 @@ namespace SDQRealEstate.Infrastructure.Persistence
             services.AddTransient<ITipoVentaRepository, TipoVentaRepository>();
             services.AddTransient<ITipoPropiedadesRepository, TipoPropiedadesRepository>();
             services.AddTransient<IPropiedadRepository, PropiedadRepository>();
+            services.AddTransient<IFavoritaRepository, FavoritaRepository>();
 
             #endregion
         }

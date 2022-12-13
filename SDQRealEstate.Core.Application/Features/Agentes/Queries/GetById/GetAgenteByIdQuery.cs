@@ -3,8 +3,10 @@ using MediatR;
 using SDQRealEstate.Core.Application.Dtos.Agentes;
 using SDQRealEstate.Core.Application.Enums;
 using SDQRealEstate.Core.Application.Interfaces.Services;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +15,9 @@ namespace SDQRealEstate.Core.Application.Features.Agentes.Queries.GetById
 {
     public class GetAgenteByIdQuery : IRequest<AgenteResponse>
     {
+
+        [SwaggerParameter(Description = "Debe colocar el id del agente")]
+        [Required]
         public String Id { get; set; }
     }
     public class GetAgenteByIdQueryHandler : IRequestHandler<GetAgenteByIdQuery, AgenteResponse>

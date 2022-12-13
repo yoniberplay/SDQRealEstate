@@ -30,5 +30,7 @@ namespace SDQRealEstate.Core.Domain.Entities
         public TipoVenta? tipoVenta { get; set; }
         public Mejora? Mejoras { get; set; }
 
+        public ICollection<Favorita>? favorita { get; set; }
+
     }
 }

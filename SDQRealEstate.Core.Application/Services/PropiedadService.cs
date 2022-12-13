@@ -49,7 +49,7 @@ namespace SDQRealEstate.Core.Application.Services
 
         public async Task<List<PropiedadViewModel>> GetAllPropiedadByAgentId(String AgentId)
         {
-            var temp = await GetAllViewModel();
+            var temp = await GetAllViewModelIcnlude();
             return temp.Where(x => x.UserId == AgentId).ToList();
 
         }

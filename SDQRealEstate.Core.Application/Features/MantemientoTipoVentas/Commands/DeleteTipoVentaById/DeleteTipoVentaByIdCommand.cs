@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Commands
 {
     public class DeleteTipoVentaByIdCommand : IRequest<int>
     {
+        [SwaggerParameter(Description = "El id del tipo de venta que se desea eliminar")]
         public int Id { get; set; }
     }
 

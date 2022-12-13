@@ -2,6 +2,7 @@
 using MediatR;
 using SDQRealEstate.Core.Application.Dtos.TipoVenta;
 using SDQRealEstate.Core.Application.Interfaces.Repositories;
+using Swashbuckle.AspNetCore.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace SDQRealEstate.Core.Application.Features.MantemientoTipoVentas.Queries.
 {
     public class GetTipoVentaByIdQuery : IRequest<TipoVentaResponse>
     {
+        [SwaggerParameter(Description = "El id del tipo de venta que se desea seleccionar")]
         public int Id { get; set; }
     }
 
