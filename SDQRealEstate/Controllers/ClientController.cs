@@ -58,6 +58,42 @@ namespace WebApp.SDQRealEstate.Controllers
 
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Busqueda(FilterPropiedad fp)
+        {
+            ViewBag.TipoPropiedad = await _itipoPropiedadService.GetAllViewModel();
+            ViewBag.Venta = await _itipoVentaService.GetAllViewModel();
+            ViewBag.Mejoras = await _imejoraService.GetAllViewModel();
+            var temp = await _ipropiedadService.GetAllViewModelIcnlude();
+
+            if (fp.Codigo != 0)
+            {
+                temp = temp.Where(x => x.Codigo == fp.Codigo).ToList();
+            }
+            if (fp.TipoPropiedadId != 0)
+            {
+                temp = temp.Where(x => x.tipoPropiedades.Id == fp.TipoPropiedadId).ToList();
+            }
+            if (fp.CantBanos != 0)
+            {
+                temp = temp.Where(x => x.CantBanos == fp.CantBanos).ToList();
+            }
+            if (fp.CantHabitaciones != 0)
+            {
+                temp = temp.Where(x => x.CantHabitaciones == fp.CantHabitaciones).ToList();
+            }
+            if (fp.PrecioMax != 0)
+            {
+                temp = temp.Where(x => x.Precio <= fp.PrecioMax).ToList();
+            }
+            if (fp.PrecioMin != 0)
+            {
+                temp = temp.Where(x => x.Precio >= fp.PrecioMin).ToList();
+            }
+
+            ViewBag.listapropiedades = temp;
+            return View("Index", fp);
+        }
         public async Task<IActionResult> Marcar(int Id)
         {
             String userid = _userLogged.Id;

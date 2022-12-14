@@ -45,54 +45,54 @@ namespace SDQRealEstate.Infrastructure.Identity
 
             services.Configure<JWTSettings>(configuration.GetSection("JWTSettings"));
 
-            //services.AddAuthentication();
+            services.AddAuthentication();
 
-            services.AddAuthentication(o =>
-            {
-                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(o =>
-            {
-                o.RequireHttpsMetadata = false;
-                o.SaveToken = false;
-                o.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateLifetime = true,
-                    ValidateAudience = true,
-                    ClockSkew = TimeSpan.Zero,
-                    ValidIssuer = configuration["JWTSettings:Issuer"],
-                    ValidAudience = configuration["JWTSettings:Audience"],
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTSettings:Key"])),
-                };
-                o.Events = new JwtBearerEvents()
-                {
-                    OnAuthenticationFailed = c =>
-                    {
-                        c.NoResult();
-                        c.Response.StatusCode = 500;
-                        c.Response.ContentType = "text/plain";
-                        return c.Response.WriteAsync(c.Exception.ToString());
-                    },
-                    OnChallenge = c =>
-                    {
-                        c.HandleResponse();
-                        c.Response.StatusCode = 401;
-                        c.Response.ContentType = "application/json";
-                        var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "Acceso denegado" });
-                        return c.Response.WriteAsync(result);
-                    },
-                    OnForbidden = c =>
-                    {
-                        c.Response.StatusCode = 403;
-                        c.Response.ContentType = "application/json";
-                        var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "No tiene autorizacion para acceder a esta area" });
-                        return c.Response.WriteAsync(result);
-                    },
+            //services.AddAuthentication(o =>
+            //{
+            //    o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            //    o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            //}).AddJwtBearer(o =>
+            //{
+            //    o.RequireHttpsMetadata = false;
+            //    o.SaveToken = false;
+            //    o.TokenValidationParameters = new TokenValidationParameters
+            //    {
+            //        ValidateIssuerSigningKey = true,
+            //        ValidateIssuer = true,
+            //        ValidateLifetime = true,
+            //        ValidateAudience = true,
+            //        ClockSkew = TimeSpan.Zero,
+            //        ValidIssuer = configuration["JWTSettings:Issuer"],
+            //        ValidAudience = configuration["JWTSettings:Audience"],
+            //        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWTSettings:Key"])),
+            //    };
+            //    o.Events = new JwtBearerEvents()
+            //    {
+            //        OnAuthenticationFailed = c =>
+            //        {
+            //            c.NoResult();
+            //            c.Response.StatusCode = 500;
+            //            c.Response.ContentType = "text/plain";
+            //            return c.Response.WriteAsync(c.Exception.ToString());
+            //        },
+            //        OnChallenge = c =>
+            //        {
+            //            c.HandleResponse();
+            //            c.Response.StatusCode = 401;
+            //            c.Response.ContentType = "application/json";
+            //            var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "Acceso denegado" });
+            //            return c.Response.WriteAsync(result);
+            //        },
+            //        OnForbidden = c =>
+            //        {
+            //            c.Response.StatusCode = 403;
+            //            c.Response.ContentType = "application/json";
+            //            var result = JsonConvert.SerializeObject(new JwtResponse() { HasError = true, Error = "No tiene autorizacion para acceder a esta area" });
+            //            return c.Response.WriteAsync(result);
+            //        },
 
-                };
-            });
+            //    };
+            //});
 
             services.ConfigureApplicationCookie(options =>
             {

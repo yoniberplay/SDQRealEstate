@@ -2,13 +2,56 @@
     ViewData["Title"] = "Home Page";
 }
 
-    <h3 class="display-4">Propiedades registradas en el sistema: @ViewBag.CantPropiedades </h3>
+      <div class="container d-flex align-items-center justify-content-center">
+
+
+            <table class="table table-success table-striped w-50 m-3 border border-success">
+
+             <thead>
+    <tr>
+      <th class="table-success text-center" colspan="2" scope="col">Cantidad y estatus de todos los usuarios</th>
+      @*<th scope="col"></th>*@
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Agentes activos :</td>
+      <td>@ViewBag.CantAgentesActivos </td>
+    </tr>
+    <tr>
+      <td>Agentes inactivos: </td>
+      <td>@ViewBag.CantAgentesInactivos</td>
+    </tr>
+    <tr>
+      <td>Clientes activos: </td>
+      <td> @ViewBag.CantClientesActivos </td>
+    </tr>
+     <tr>
+      <td>Clientes activos: </td>
+      <td> @ViewBag.CantClientesInactivos </td>
+    </tr>
+     <tr>
+      <td>Desarrolladores activos: </td>
+      <td> @ViewBag.CantDesarrolladoresActivos </td>
+    </tr>
+     <tr>
+      <td>Desarrolladores inactivos: </td>
+      <td> @ViewBag.CantDesarrolladoresInactivos </td>
+    </tr>
+  </tbody>
+
+
+        </table>
+        </div>
+
+
+         @*  <h3 class="display-4">Propiedades registradas en el sistema: @ViewBag.CantPropiedades </h3>
     <hr />
      <h3 class="display-4">Agentes activos: @ViewBag.CantAgentesActivos </h3>
       <h3 class="display-4">Agentes inactivos: @ViewBag.CantAgentesInactivos </h3>
       <hr />
-       <h3 class="display-4">Clientes activos: @ViewBag.CantClientesActivos </h3>
-        <h3 class="display-4">Clientes inactivos: @ViewBag.CantClientesInactivos </h3>
+       <h3 class="display-4">Clientes activos: @ViewBag.CantClientesActivos </h3>*@
+        @*<h3 class="display-4">Clientes inactivos: @ViewBag.CantClientesInactivos </h3>
          <hr />
        <h3 class="display-4">Desarrolladores activos: @ViewBag.CantDesarrolladoresActivos </h3>
-        <h3 class="display-4">Desarrolladores inactivos: @ViewBag.CantDesarrolladoresInactivos </h3>
+        <h3 class="display-4">Desarrolladores inactivos: @ViewBag.CantDesarrolladoresInactivos </h3>*@
